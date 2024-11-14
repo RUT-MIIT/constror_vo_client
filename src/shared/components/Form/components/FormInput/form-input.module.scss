@@ -1,0 +1,33 @@
+.input {
+  margin: 0px;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 9px 16px 9px 16px;
+  border: 2px solid var(--background-color);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  background: var(--main-grey-color);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  transition: all .3s ease-in-out;
+	&:hover {
+		border: 2px solid var(--accent-grey-color);
+	}
+	&:active {
+		border: 2px solid var(--accent-blue-color);
+	}
+	&:focus {
+		border: 2px solid var(--accent-blue-color);
+	}
+	&::placeholder {
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 18px;
+		color: var(--accent-grey-color);
+	}
+}

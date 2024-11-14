@@ -1,0 +1,27 @@
+.container {
+	margin: 0;
+	display: grid;
+	justify-items: center;
+	grid-template-columns: 1fr;
+	gap: 8px;
+	&_width_full {
+		width: 100%;
+	}
+}
+
+.title {
+	margin: 0;
+	width: 100%;
+	text-align: center;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 900;
+	line-height: 24px;
+	color: var(--main-black-color);
+	&_align_left {
+		text-align: left;
+	}
+	&_align_center {
+		text-align: center;
+	}
+}
