@@ -1,0 +1,38 @@
+.container {
+  margin: 12px 0 0 0;
+  width: 100%;
+  padding: 0 0 16px 0;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+	margin: 0 0 8px 0;
+	color: var(--main-black-color);
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 18px;
+}
+
+.error {
+  margin: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+  min-height: 12px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--accent-orange-color);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: all .3s ease-in-out;
+	&_status_show {
+		opacity: 1;
+	}
+}

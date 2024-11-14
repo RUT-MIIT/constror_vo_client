@@ -1,0 +1,12 @@
+.container {
+	margin: 0;
+	padding: 24px 32px;
+	background: var(--main-white-color);
+	border-radius: var(--border-radius);
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	&_width_default {
+		width: 414px;
+	}
+}
