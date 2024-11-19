@@ -37,5 +37,5 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-size-adjust: 100%;
-	background-color: var(--main-white-color);
+	background-color: var(--background-color);
 }

@@ -1,55 +1,50 @@
 import type { FC, FormEvent } from 'react';
+import type { ILoginForm } from '../types/types';
+
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from '../../../store/store';
+import { useForm } from '../../../hooks/useForm';
 
 import { PublicLayout } from '../../../shared/components/Layout/PublicLayout/ui/public-layout';
 import { Section } from '../../../shared/components/Section/ui/section';
 import { Form } from '../../../shared/components/Form/ui/form';
-import { FormField } from '../../../shared/components/Form/components/FormField/form-field';
-import { FormInput } from '../../../shared/components/Form/components/FormInput/form-input';
-import { FormLinks } from '../../../shared/components/Form/components/FormLinks/form-links';
-
-import { useForm } from '../../../hooks/useForm';
 import {
-	required,
-	minLength,
-	emailFormat,
-} from '../../../shared/lib/validationRules';
+	FormField,
+	FormInput,
+	FormButtons,
+	FormLinks,
+} from '../../../shared/components/Form/components';
+import { Button } from '../../../shared/components/Button/ui/button';
+
+import { links, validationSchema, shouldBlockSubmit } from '../lib/helpers';
+
+import { loginUser } from '../../../store/user/actions';
 
 import styles from '../styles/login.module.scss';
 
-const links = [
-	{ label: 'Новый пользователь?', text: 'Регистрация', url: '/registration' },
-];
-
-interface ILoginForm {
-	email: string;
-	password: string;
-}
-
-const validationSchema = {
-	email: [
-		required('Введите электронную почту'),
-		emailFormat('Неверный формат электронной почты'),
-	],
-	password: [
-		required('Введите пароль'),
-		minLength(6, 'Пароль должен быть не менее 6 символов'),
-	],
-};
-
 export const Login: FC = () => {
+	const dispatch = useDispatch();
+	const { isLoading } = useSelector((state) => state.user);
+	const [isBlockSubmit, setIsBlockSubmit] = useState<boolean>(true);
 	const { values, handleChange, errors } = useForm<ILoginForm>(
 		{ email: '', password: '' },
 		validationSchema
 	);
 
-	const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (!errors.email && !errors.password) {
-			console.log('Форма отправлена', values);
-		} else {
-			console.log('Ошибки в форме');
+		if (!isBlockSubmit) {
+			dispatch(loginUser(values));
 		}
 	};
+
+	const handleClick = () => {
+		console.log('click');
+	};
+
+	useEffect(() => {
+		setIsBlockSubmit(shouldBlockSubmit(values, errors));
+	}, [values, errors]);
 
 	return (
 		<PublicLayout>
@@ -57,7 +52,7 @@ export const Login: FC = () => {
 				<Section>
 					<Form
 						name='form-login'
-						onSubmit={handleLogin}
+						onSubmit={handleSubmit}
 						title='Вход в Конструктор ВО'
 						titleAlign='center'>
 						<FormField
@@ -81,6 +76,18 @@ export const Login: FC = () => {
 								onChange={handleChange}
 							/>
 						</FormField>
+						<FormButtons>
+							<Button
+								text='Забыли пароль?'
+								style='cancel'
+								width='full'
+								onClick={handleClick}></Button>
+							<Button
+								type='submit'
+								text='Вход'
+								width='full'
+								isBlock={isBlockSubmit || isLoading}></Button>
+						</FormButtons>
 					</Form>
 				</Section>
 				<FormLinks links={links} />
