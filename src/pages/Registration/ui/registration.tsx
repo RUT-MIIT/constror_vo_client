@@ -1,59 +1,55 @@
 import type { FC, FormEvent } from 'react';
+import type { IRegistrationForm } from '../types/types';
+
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from '../../../store/store';
+import { useForm } from '../../../hooks/useForm';
 
 import { PublicLayout } from '../../../shared/components/Layout/PublicLayout/ui/public-layout';
 import { Section } from '../../../shared/components/Section/ui/section';
 import { Form } from '../../../shared/components/Form/ui/form';
-import { FormField } from '../../../shared/components/Form/components/FormField/form-field';
-import { FormInput } from '../../../shared/components/Form/components/FormInput/form-input';
-import { FormLinks } from '../../../shared/components/Form/components/FormLinks/form-links';
-
-import { useForm } from '../../../hooks/useForm';
 import {
-	required,
-	minLength,
-	emailFormat,
-} from '../../../shared/lib/validationRules';
+	FormField,
+	FormInput,
+	FormButtons,
+	FormLinks,
+} from '../../../shared/components/Form/components';
+import { Button } from '../../../shared/components/Button/ui/button';
+
+import { links, validationSchema, shouldBlockSubmit } from '../lib/helpers';
+
+import { registerUser } from '../../../store/user/actions';
 
 import styles from '../styles/registration.module.scss';
 
-const links = [{ label: 'Уже есть аккаунт?', text: 'Войти', url: '/' }];
-
-interface IRegistrationForm {
-	lastName: string;
-	firstName: string;
-	fatherName: string;
-	email: string;
-	password: string;
-}
-
-const validationSchema = {
-	lastName: [required('Введите фамилию')],
-	firstName: [required('Введите имя')],
-	fatherName: [required('Введите отчество')],
-	email: [
-		required('Введите электронную почту'),
-		emailFormat('Неверный формат электронной почты'),
-	],
-	password: [
-		required('Введите пароль'),
-		minLength(6, 'Пароль должен быть не менее 6 символов'),
-	],
-};
-
 export const Registration: FC = () => {
+	const dispatch = useDispatch();
+	const { isLoading } = useSelector((state) => state.user);
+	const [isBlockSubmit, setIsBlockSubmit] = useState<boolean>(true);
 	const { values, handleChange, errors } = useForm<IRegistrationForm>(
 		{ lastName: '', firstName: '', fatherName: '', email: '', password: '' },
 		validationSchema
 	);
 
-	const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (!errors.email && !errors.password) {
-			console.log('Форма отправлена', values);
-		} else {
-			console.log('Ошибки в форме');
+		if (!isBlockSubmit) {
+			dispatch(
+				registerUser({
+					email: values.email,
+					first_name: values.firstName,
+					last_name: values.lastName,
+					middle_name: values.fatherName,
+					password1: values.password,
+					password2: values.password,
+				})
+			);
 		}
 	};
+
+	useEffect(() => {
+		setIsBlockSubmit(shouldBlockSubmit(values, errors));
+	}, [values, errors]);
 
 	return (
 		<PublicLayout>
@@ -61,7 +57,7 @@ export const Registration: FC = () => {
 				<Section>
 					<Form
 						name='form-registration'
-						onSubmit={handleLogin}
+						onSubmit={handleSubmit}
 						title='Регистрация'
 						titleAlign='center'>
 						<FormField
@@ -121,6 +117,13 @@ export const Registration: FC = () => {
 								onChange={handleChange}
 							/>
 						</FormField>
+						<FormButtons>
+							<Button
+								type='submit'
+								text='Зарегистрироваться'
+								width='full'
+								isBlock={isBlockSubmit || isLoading}></Button>
+						</FormButtons>
 					</Form>
 				</Section>
 				<FormLinks links={links} />

@@ -28,9 +28,8 @@ export interface IFormInputProps {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface IFormSubmitProps {
-	text: string;
-	isBlock?: boolean;
+export interface IFormButtonsProps {
+	children?: ReactNode;
 }
 
 export interface IFormLink {
@@ -42,3 +41,5 @@ export interface IFormLink {
 export interface IFormLinksProps {
 	links: IFormLink[];
 }
+
+export type TFormValidationErrors = Record<string, string | undefined>;
