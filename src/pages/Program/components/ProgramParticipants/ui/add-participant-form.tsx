@@ -1,7 +1,7 @@
 import type { FC, FormEvent } from 'react';
 import type { IUser, IProgramRole } from '../../../../../store/catalog/types';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from '../../../../../store/store';
 
 import { Form } from '../../../../../shared/components/Form/ui/form';
@@ -35,6 +35,11 @@ export const AddParticipantForm: FC = () => {
 	const [currentRole, setCurrentRole] = useState<IProgramRole>(
 		initialData.role
 	);
+
+	const availableUsers = useMemo(() => {
+		const participantIds = program?.participants.map((p) => p.user.id) || [];
+		return users.filter((user) => !participantIds.includes(user.id));
+	}, [users, program]);
 
 	const [isBlockSubmit, setIsBlockSubmit] = useState<boolean>(true);
 
@@ -84,7 +89,7 @@ export const AddParticipantForm: FC = () => {
 			<FormField title='Пользователь:'>
 				<Select
 					currentOption={currentUser}
-					options={users}
+					options={availableUsers}
 					onChooseOption={handleChangeUser}
 				/>
 			</FormField>

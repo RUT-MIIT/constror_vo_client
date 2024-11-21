@@ -105,9 +105,16 @@
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
+	&_empty {
+		color: var(--accent-grey-color);
+	}
 }
 
 .item:hover .text {
   color: var(--accent-blue-color);
+}
+
+.item:hover .text_empty {
+  color: var(--accent-grey-color);
 }
 
