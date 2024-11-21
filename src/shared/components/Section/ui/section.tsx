@@ -5,6 +5,8 @@ import styles from '../styles/section.module.scss';
 
 export const Section: FC<ISectionProps> = ({
 	sectionWidth = 'default',
+	sectionTitle,
+	sectionDescription,
 	children,
 }) => {
 	return (
@@ -12,6 +14,10 @@ export const Section: FC<ISectionProps> = ({
 			className={`${styles.container} ${
 				styles[`container_width_${sectionWidth}`]
 			}`}>
+			{sectionTitle && <h2 className={styles.title}>{sectionTitle.text}</h2>}
+			{sectionDescription && (
+				<p className={styles.description}>{sectionDescription}</p>
+			)}
 			{children}
 		</section>
 	);

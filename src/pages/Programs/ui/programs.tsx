@@ -1,20 +1,22 @@
 import type { FC } from 'react';
-import type { IProgramItem } from '../../../store/program/types';
+import type { IProgramItem } from '../../../store/programList/types';
 
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../../store/store';
 
 import {
 	getProgramsList,
 	removeProgramFromList,
-} from '../../../store/program/actions';
+} from '../../../store/programList/actions';
 import { getEducationDirectionsList } from '../../../store/catalog/actions';
 import {
 	setIsAddProgram,
 	setIsEditProgram,
 	setIsRemoveProgram,
 	setCurrentProgram,
-} from '../../../store/program/reducer';
+} from '../../../store/programList/reducer';
+import { EROUTES } from '../../../shared/utils/routes';
 
 import { Section } from '../../../shared/components/Section/ui/section';
 import { Modal } from '../../../shared/components/Modal/ui/modal';
@@ -29,6 +31,7 @@ import styles from '../styles/programs.module.scss';
 
 export const Programs: FC = () => {
 	const dispatch = useDispatch();
+	const navigation = useNavigate();
 
 	const openAddProgramModal = () => {
 		dispatch(setIsAddProgram(true));
@@ -64,7 +67,7 @@ export const Programs: FC = () => {
 		isRemoveProgram,
 		loading: loadingPrograms,
 		error: errorPrograms,
-	} = useSelector((state) => state.program);
+	} = useSelector((state) => state.programList);
 	const {
 		educationDirections,
 		loading: loadingCatalog,
@@ -129,7 +132,11 @@ export const Programs: FC = () => {
 								/>
 							</div>
 						</div>
-						<h3 className={styles.title}>{item.profile || ''}</h3>
+						<h3
+							className={styles.title}
+							onClick={() => navigation(`${EROUTES.PROGRAM}/${item.id}/info`)}>
+							{item.profile || ''}
+						</h3>
 						<p className={styles.description}>id программы: {item.id || ''}</p>
 						<Badge text={item.my_role} />
 					</li>

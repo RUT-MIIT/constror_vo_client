@@ -4,6 +4,7 @@ import type {
 	IEducationDirection,
 	IEducationForm,
 } from '../../../store/catalog/types';
+import type { IUploadFile } from '../../../shared/components/UploadField/ui/upload-field';
 
 import { useState, useEffect } from 'react';
 import { useDispatch } from '../../../store/store';
@@ -16,11 +17,12 @@ import {
 	FormButtons,
 } from '../../../shared/components/Form/components';
 import { Select } from '../../../shared/components/Select/ui/select';
+import { UploadField } from '../../../shared/components/UploadField/ui/upload-field';
 import { Button } from '../../../shared/components/Button/ui/button';
 
 import { validationSchema } from '../lib/helpers';
 
-import { addProgramToList } from '../../../store/program/actions';
+import { addProgramToList } from '../../../store/programList/actions';
 import { educationForms } from '../../../store/catalog/mock';
 
 const initialData = {
@@ -45,6 +47,7 @@ export const AddProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 	const [currentForm, setCurrentForm] = useState<IEducationForm>(
 		initialData.form
 	);
+	const [currentFile, setCurrentFile] = useState<IUploadFile | null>(null);
 
 	const [isBlockSubmit, setIsBlockSubmit] = useState<boolean>(true);
 	const { values, handleChange, errors } = useForm<IAddProgramValues>(
@@ -60,6 +63,10 @@ export const AddProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 		setCurrentForm(option);
 	};
 
+	const handleChangeFile = (file: IUploadFile) => {
+		setCurrentFile(file);
+	};
+
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!isBlockSubmit) {
@@ -67,6 +74,12 @@ export const AddProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 				direction: currentDirection,
 				profile: values.profile,
 				form: currentForm.name,
+				...(currentFile && {
+					fgos_file: {
+						base64: currentFile.base64,
+						filename: currentFile.name,
+					},
+				}),
 			};
 			dispatch(addProgramToList({ program: newProgram }));
 		}
@@ -106,6 +119,9 @@ export const AddProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 					options={educationForms}
 					onChooseOption={handleChangeForm}
 				/>
+			</FormField>
+			<FormField title='Образовательный стандарт:'>
+				<UploadField file={currentFile} onChange={handleChangeFile} />
 			</FormField>
 			<FormField
 				title='Профиль:'

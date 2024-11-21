@@ -5,7 +5,7 @@ import styles from '../styles/icon.module.scss';
 
 export const Icon: FC<IIcon> = ({
 	icon,
-	type = 'elem',
+	type = 'button',
 	color = 'grey',
 	onClick,
 }) => {

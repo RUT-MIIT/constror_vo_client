@@ -1,0 +1,20 @@
+.container {
+	margin: 0;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+
+.fields {
+	margin: 20px 0 0 0;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+}
+
+.participants {
+	margin: 20px 0 0 0;
+	width: 100%;
+}

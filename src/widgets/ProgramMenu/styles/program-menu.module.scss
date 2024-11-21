@@ -1,0 +1,157 @@
+.nav {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+}
+
+.menu {
+  margin: 0;
+  padding: 0 8px 0 0;
+  box-sizing: border-box;
+  width: 268px;
+  height: calc(100vh - 24px);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  list-style-type: none;
+  overflow-y: auto;
+}
+
+.item {
+  margin: 0;
+  padding: 8px 0;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: .3s ease-in-out;
+}
+
+.tem:first-of-type {
+  padding: 0 0 8px 0;
+}
+
+.item:last-of-type {
+  padding: 8px 0 0 0;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.icon__container {
+  margin: 0 16px 0 0;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--slider-color);
+  border-radius: var(--border-radius);
+}
+
+.icon__container:before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 19px;
+  width: 2px;
+  height: 60px;
+  background: var(--slider-color);
+}
+
+.icon__container:after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 19px;
+  width: 2px;
+  height: 60px;
+  background: var(--slider-color);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.icon_type_info {
+  background-image: url('../../../shared/images/icons/program-menu/program-info-grey.svg');
+}
+
+.item_active .icon_type_info {
+  background-image: url('../../../shared/images/icons/program-menu/program-info-white.svg');
+}
+
+.icon_type_data {
+  background-image: url('../../../shared/images/icons/program-menu/program-data-grey.svg');
+}
+
+.item_active .icon_type_data {
+  background-image: url('../../../shared/images/icons/program-menu/program-data-white.svg');
+}
+
+.icon_type_reconstruction {
+  background-image: url('../../../shared/images/icons/program-menu/program-reconstruction-grey.svg');
+}
+
+.item_active .icon_type_reconstruction {
+  background-image: url('../../../shared/images/icons/program-menu/program-reconstruction-white.svg');
+}
+
+.item:first-of-type .icon__container:before {
+  display: none;
+}
+
+.item:last-of-type .icon__container:after {
+  display: none;
+}
+
+.item_active .icon__container {
+  background: var(--accent-blue-color);
+}
+
+.card {
+  margin: 0;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-white-color);
+  border-radius: var(--border-radius);
+}
+
+.item_active .card {
+  background: var(--accent-blue-color);
+}
+
+.title {
+  margin: 0px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--main-black-color);
+}
+.item_active .title {
+  color: var(--main-white-color);
+}
+
+.description {
+  margin: 8px 0px 0px 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--main-black-color);
+}
+
+.item_active .description {
+  color: var(--main-white-color);
+}

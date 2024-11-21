@@ -5,19 +5,14 @@ import type {
 	IMessageResponse,
 } from './types';
 
-import {
-	getPrograms,
-	addProgram,
-	editProgram,
-	removeProgram,
-} from '../../shared/api/programs';
+import * as api from '../../shared/api/programs';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getProgramsList = createAsyncThunk<IProgramItem[]>(
-	'program/getProgramsList',
+	'programList/getProgramsList',
 	async () => {
-		const response = await getPrograms();
+		const response = await api.getPrograms();
 		return response;
 	}
 );
@@ -25,14 +20,14 @@ export const getProgramsList = createAsyncThunk<IProgramItem[]>(
 export const addProgramToList = createAsyncThunk<
 	IProgramItem,
 	IAddProgramRequest
->('program/addProgram', addProgram);
+>('programList/addProgram', api.addProgram);
 
 export const editProgramFromList = createAsyncThunk<
 	IProgramItem,
 	IEditProgramRequest
->('program/editProgram', editProgram);
+>('programList/editProgram', api.editProgram);
 
 export const removeProgramFromList = createAsyncThunk<IMessageResponse, number>(
-	'program/removeProgram',
-	removeProgram
+	'programList/removeProgram',
+	api.removeProgram
 );

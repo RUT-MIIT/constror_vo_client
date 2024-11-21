@@ -20,9 +20,15 @@ export interface IProgramRole {
 	name: string;
 }
 
+export interface IUser {
+	id: number;
+	name: string;
+}
+
 export interface ICatalogStore {
 	educationLevels: IEducationLevel[];
 	educationDirections: IEducationDirection[];
+	users: IUser[];
 	programRoles: IProgramRole[];
 	loading: boolean;
 	error: string | null;
