@@ -7,5 +7,6 @@ export enum EROUTES {
 	RESET_PASSWORD = '/reset-password',
 	PROFILE = '/profile',
 	PROGRAMS = '/programs',
+	PROGRAM = '/program',
 	NOT_FOUND = '*',
 }

@@ -1,12 +1,14 @@
 import type {
 	IEducationLevel,
 	IEducationDirection,
+	IUser,
 	IProgramRole,
 } from './types';
 
 import {
 	getEducationLevels,
 	getEducationDirections,
+	getUsers,
 	getProgramRoles,
 } from '../../shared/api/catalog';
 
@@ -26,6 +28,14 @@ export const getEducationDirectionsList = createAsyncThunk<
 	const response = await getEducationDirections();
 	return response;
 });
+
+export const getUsersList = createAsyncThunk<IUser[]>(
+	'catalog/getUsers',
+	async () => {
+		const response = await getUsers();
+		return response;
+	}
+);
 
 export const getProgramRolesList = createAsyncThunk<IProgramRole[]>(
 	'catalog/getProgramRoles',

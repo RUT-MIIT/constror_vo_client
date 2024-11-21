@@ -4,7 +4,7 @@ import type {
 	IProgramRole,
 } from '../catalog/types';
 
-export interface IProgramStore {
+export interface IProgramListStore {
 	programList: IProgramItem[];
 	isAddProgram: boolean;
 	isEditProgram: boolean;
@@ -51,6 +51,10 @@ export interface INewProgram {
 	direction: IEducationDirection;
 	profile: string;
 	form: string;
+	fgos_file?: {
+		base64: string | ArrayBuffer | null;
+		filename: string;
+	};
 }
 
 export interface IMessageResponse {

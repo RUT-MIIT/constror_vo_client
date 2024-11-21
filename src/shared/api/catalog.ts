@@ -22,6 +22,17 @@ export const getEducationDirections = () => {
 	});
 };
 
+export const getUsers = () => {
+	return request('/users', {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('accessToken') || ''}`,
+		},
+	});
+};
+
 export const getProgramRoles = () => {
 	return request('/program_roles', {
 		method: 'GET',

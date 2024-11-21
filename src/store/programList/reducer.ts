@@ -1,14 +1,9 @@
-import type { IProgramStore, IProgramItem } from './types';
+import type { IProgramListStore, IProgramItem } from './types';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import {
-	getProgramsList,
-	addProgramToList,
-	editProgramFromList,
-	removeProgramFromList,
-} from './actions';
+import * as actions from './actions';
 
-export const initialState: IProgramStore = {
+export const initialState: IProgramListStore = {
 	programList: [],
 	isAddProgram: false,
 	isEditProgram: false,
@@ -18,8 +13,8 @@ export const initialState: IProgramStore = {
 	error: null,
 };
 
-export const programSlice = createSlice({
-	name: 'program',
+export const programListSlice = createSlice({
+	name: 'programList',
 	initialState,
 	reducers: {
 		setCurrentProgram: (state, action: PayloadAction<IProgramItem | null>) => {
@@ -38,33 +33,33 @@ export const programSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(
-				getProgramsList.fulfilled,
+				actions.getProgramsList.fulfilled,
 				(state, action: PayloadAction<IProgramItem[]>) => {
 					state.programList = action.payload;
 					state.loading = false;
 				}
 			)
-			.addCase(getProgramsList.pending, (state) => {
+			.addCase(actions.getProgramsList.pending, (state) => {
 				state.loading = true;
 				state.error = null;
 			})
-			.addCase(getProgramsList.rejected, (state, action) => {
+			.addCase(actions.getProgramsList.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error?.message || 'Произошла ошибка';
 			})
 			.addCase(
-				addProgramToList.fulfilled,
+				actions.addProgramToList.fulfilled,
 				(state, action: PayloadAction<IProgramItem>) => {
 					state.programList = [...state.programList, action.payload];
 					state.isAddProgram = false;
 				}
 			)
-			.addCase(addProgramToList.rejected, (state, action) => {
+			.addCase(actions.addProgramToList.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error?.message || 'Произошла ошибка';
 			})
 			.addCase(
-				editProgramFromList.fulfilled,
+				actions.editProgramFromList.fulfilled,
 				(state, action: PayloadAction<IProgramItem>) => {
 					state.programList = state.programList.map((program) =>
 						program.id === action.payload.id ? action.payload : program
@@ -72,7 +67,7 @@ export const programSlice = createSlice({
 					state.isEditProgram = false;
 				}
 			)
-			.addCase(removeProgramFromList.fulfilled, (state, action) => {
+			.addCase(actions.removeProgramFromList.fulfilled, (state, action) => {
 				const programId = action.meta.arg;
 				state.programList = state.programList.filter(
 					(elem) => elem.id !== programId
@@ -88,4 +83,4 @@ export const {
 	setIsEditProgram,
 	setIsRemoveProgram,
 	setCurrentProgram,
-} = programSlice.actions;
+} = programListSlice.actions;

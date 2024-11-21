@@ -1,0 +1,21 @@
+.field {
+  margin: 0px;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 9px 16px 9px 16px;
+  border: 2px solid var(--main-grey-color);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  background: var(--background-color);
+	cursor: default;
+}
+
+.text {
+	margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}

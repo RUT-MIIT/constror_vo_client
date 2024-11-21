@@ -1,7 +1,7 @@
 import type {
 	IAddProgramRequest,
 	IEditProgramRequest,
-} from '../../store/program/types';
+} from '../../store/programList/types';
 
 import { request } from './utils';
 

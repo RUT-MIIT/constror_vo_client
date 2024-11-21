@@ -20,7 +20,7 @@ import { Button } from '../../../shared/components/Button/ui/button';
 
 import { validationSchema } from '../lib/helpers';
 
-import { editProgramFromList } from '../../../store/program/actions';
+import { editProgramFromList } from '../../../store/programList/actions';
 import { educationForms } from '../../../store/catalog/mock';
 
 const initialData = {
@@ -38,7 +38,7 @@ const initialData = {
 
 export const EditProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 	const dispatch = useDispatch();
-	const { currentProgram } = useSelector((state) => state.program);
+	const { currentProgram } = useSelector((state) => state.programList);
 
 	const [currentDirection, setCurrentDirection] = useState<IEducationDirection>(
 		currentProgram ? currentProgram.direction : initialData.direction

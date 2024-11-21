@@ -32,6 +32,12 @@ const Protected: FC<IProtectedProps> = ({ onlyUnAuth = false, component }) => {
 		return <Navigate to={EROUTES.PROFILE} />;
 	}
 
+	if (user) {
+		if (location.pathname === EROUTES.HOME) {
+			return <Navigate to={EROUTES.PROFILE} />;
+		}
+	}
+
 	return component;
 };
 
