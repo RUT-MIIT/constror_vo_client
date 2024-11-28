@@ -60,11 +60,7 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (
-			program &&
-			productWizardData?.steps[0]?.chunks?.methodologies &&
-			productWizardData?.steps[0]?.chunks?.subject_scope
-		) {
+		if (program) {
 			const data = {
 				programId: program.id,
 				methodologies: methodology,
