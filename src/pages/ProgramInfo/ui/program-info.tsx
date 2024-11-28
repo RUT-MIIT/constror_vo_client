@@ -66,9 +66,7 @@ export const ProgramInfo: FC = () => {
 				sectionWidth='full'
 				sectionTitle={{ text: 'Участники программы' }}
 				sectionDescription='Список участников и их роли.'>
-				<div className={styles.participants}>
-					<ProgramParticipants />
-				</div>
+				<ProgramParticipants />
 			</Section>
 		</div>
 	);

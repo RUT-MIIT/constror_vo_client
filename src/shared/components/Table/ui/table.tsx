@@ -3,6 +3,8 @@ import type { ITableProps } from '../types/types';
 
 import '../styles/table.scss';
 
-export const Table: FC<ITableProps> = ({ children }) => {
-	return <div className='table'>{children}</div>;
+export const Table: FC<ITableProps> = ({ marginTop = '0', children }) => {
+	return (
+		<div className={`table table_margin-top_${marginTop}`}>{children}</div>
+	);
 };

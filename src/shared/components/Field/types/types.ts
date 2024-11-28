@@ -1,3 +1,6 @@
+import type { ReactNode } from 'react';
+
 export interface IFieldProps {
-	text: string;
+	text?: string;
+	children?: ReactNode;
 }

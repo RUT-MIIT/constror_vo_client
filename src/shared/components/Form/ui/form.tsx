@@ -17,6 +17,7 @@ export const Form: FC<IFormProps> = ({
 				styles[`container_width_${formWidth}`]
 			}`}
 			name={name}
+			id={name}
 			onSubmit={onSubmit}
 			noValidate>
 			{title && (

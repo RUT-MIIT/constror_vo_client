@@ -5,7 +5,7 @@ export interface IFormProps {
 	titleAlign?: 'center' | 'left';
 	formWidth?: 'full' | 'large' | 'default' | 'small';
 	name: string;
-	onSubmit: FormEventHandler<HTMLFormElement>;
+	onSubmit?: FormEventHandler<HTMLFormElement>;
 	children?: ReactNode;
 }
 
@@ -26,6 +26,13 @@ export interface IFormInputProps {
 	placeholder?: string;
 	value: string;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface IFormTextareaProps {
+	name: string;
+	placeholder?: string;
+	value: string;
+	onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export interface IFormButtonsProps {

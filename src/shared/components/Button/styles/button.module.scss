@@ -37,6 +37,13 @@
 			box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
 		}
 	}
+	&_style_magic {
+		color: var(--main-white-color);
+		background: linear-gradient(to right, #F05FC7, #925FF0);
+		border: none;
+		box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.12);
+		padding: 11px;
+	}
 	&_style_cancel {
 		color: var(--main-black-color);
 		background: var(--main-white-color);

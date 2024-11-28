@@ -51,16 +51,24 @@ export const Select = <T extends { id: string | number; name: string }>({
 					isOpenSelectOptions ? styles.options_status_open : ''
 				}`}>
 				<ul className={styles.list}>
-					{options
-						.filter((item) => item.id !== currentOption.id)
-						.map((item, i) => (
-							<li
-								className={styles.item}
-								key={i}
-								onClick={() => chooseOption(item)}>
-								<p className={styles.text}>{item.name}</p>
-							</li>
-						))}
+					{options.length > 0 ? (
+						options
+							.filter((item) => item.id !== currentOption.id)
+							.map((item, i) => (
+								<li
+									className={styles.item}
+									key={i}
+									onClick={() => chooseOption(item)}>
+									<p className={styles.text}>{item.name}</p>
+								</li>
+							))
+					) : (
+						<li className={styles.item}>
+							<p className={`${styles.text} ${styles.text_empty}`}>
+								Результаты не найдены.
+							</p>
+						</li>
+					)}
 				</ul>
 			</div>
 		</div>

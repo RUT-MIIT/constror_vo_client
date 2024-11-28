@@ -13,6 +13,8 @@ export const Modal: FC<IModalProps> = ({
 	isOpen,
 	onClose,
 	title,
+	description,
+	modalWidth = 'default',
 	closeByClickOutside = true,
 	closeByPressEsc = true,
 	children,
@@ -30,12 +32,18 @@ export const Modal: FC<IModalProps> = ({
 	const modalContent = (
 		<div className={`${styles.modal} ${isOpen ? styles.modal_opened : ''}`}>
 			{isOpen && <ModalOverlay onClick={handleOverlayClick} />}
-			<div className={styles.container}>
+			<div
+				className={`${styles.container} ${
+					styles[`container_width_${modalWidth}`]
+				}`}>
 				<button
 					className={styles.close}
 					type='button'
 					onClick={onClose}></button>
 				{title && <h2 className={styles.title}>{title || ''}</h2>}
+				{description && (
+					<p className={styles.description}>{description || ''}</p>
+				)}
 				{children}
 			</div>
 		</div>

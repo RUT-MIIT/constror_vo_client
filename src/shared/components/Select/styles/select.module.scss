@@ -3,15 +3,15 @@
 	width: 100%;
   min-width: 164px;
   min-height: 40px;
+	padding: 8px 16px 8px 16px;
+  box-sizing: border-box;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px 8px 16px;
-  border: 2px solid var(--background-color);
-  box-sizing: border-box;
-  background: var(--main-grey-color);
+  border: 2px solid var(--main-grey-color);
   border-radius: var(--border-radius);
+  background: var(--background-color);
   transition: all .3s ease-in-out;
 	&:hover {
 		border: 2px solid var(--accent-grey-color);
@@ -64,9 +64,9 @@
 
 .options {
   width: 100%;
-  margin: 8px 0 0 0;
-  background: var(--main-grey-color);
-  border-radius: 8px 8px 8px 8px;
+  margin: 0;
+  background: var(--background-color);
+  border-radius: 8px;
   display: none;
   position: absolute;
   top: 38px;
@@ -105,9 +105,16 @@
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
+	&_empty {
+		color: var(--accent-grey-color);
+	}
 }
 
 .item:hover .text {
   color: var(--accent-blue-color);
+}
+
+.item:hover .text_empty {
+  color: var(--accent-grey-color);
 }
 

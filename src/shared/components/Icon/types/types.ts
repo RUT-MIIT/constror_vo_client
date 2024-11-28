@@ -1,6 +1,6 @@
 export interface IIcon {
-	icon: 'edit' | 'delete';
+	icon: 'add' | 'edit' | 'delete' | 'close';
 	type?: 'elem' | 'button';
 	color?: string;
-	onClick?: () => void;
+	onClick?: (arg?: number | object) => void;
 }
