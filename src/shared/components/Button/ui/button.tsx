@@ -7,6 +7,7 @@ export const Button: FC<IButtonProps> = ({
 	type = 'button',
 	width = 'default',
 	style = 'default',
+	form,
 	isBlock = false,
 	text,
 	onClick,
@@ -27,7 +28,8 @@ export const Button: FC<IButtonProps> = ({
 				styles[`button_style_${style}`]
 			}`}
 			onClick={onClick}
-			type={type}>
+			type={type}
+			form={form}>
 			{text || ''}
 		</button>
 	);

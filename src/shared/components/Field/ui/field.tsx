@@ -3,10 +3,11 @@ import type { IFieldProps } from '../types/types';
 
 import styles from '../styles/field.module.scss';
 
-export const Field: FC<IFieldProps> = ({ text }) => {
+export const Field: FC<IFieldProps> = ({ text, children }) => {
 	return (
 		<div className={styles.field}>
-			<p className={styles.text}>{text}</p>
+			{text && <p className={styles.text}>{text}</p>}
+			{children}
 		</div>
 	);
 };

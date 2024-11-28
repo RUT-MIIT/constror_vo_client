@@ -1,4 +1,4 @@
 export enum EProgramRoutes {
 	INFO = '/info',
-	DATA = '/data',
+	PRODUCTS = '/products',
 }

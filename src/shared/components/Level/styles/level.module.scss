@@ -1,0 +1,47 @@
+.container {
+	margin: 0;
+	width: 100%;
+	padding: 20px 24px;
+	background: var(--background-color);
+	border-radius: var(--border-radius);
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	margin: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.title {
+	margin: 0 12px 0 0;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 20px;
+	font-style: normal;
+	color: var(--main-black-color);
+}
+
+.count {
+	margin: 0 12px 0 0;
+	font-size: 20px;
+	font-weight: normal;
+	line-height: 20px;
+	font-style: normal;
+	color: var(--main-black-color);
+}
+
+.control {
+	margin: 0 0 0 auto;
+}
+
+.main {
+	margin: 12px 0 0 0;
+	width: 100%;
+	min-height: 400px;
+	display: flex;
+	flex-direction: column;
+}
