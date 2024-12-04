@@ -5,7 +5,7 @@ export interface IModalProps extends PropsWithChildren {
 	onClose: () => void;
 	title?: string;
 	description?: string;
-	modalWidth?: 'default' | 'wizard';
+	modalWidth?: 'default' | 'wizard' | 'small';
 	closeByClickOutside?: boolean;
 	closeByPressEsc?: boolean;
 }

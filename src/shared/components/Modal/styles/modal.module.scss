@@ -44,8 +44,11 @@
 	border-radius: var(--border-radius);
 	box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
 	z-index: 2000;
+	&_width_small {
+		max-width: 480px;
+	}
 	&_width_default {
-		max-width: 520px;
+		max-width: 720px;
 	}
 	&_width_wizard {
 		margin: 8vh 24px 0 auto;

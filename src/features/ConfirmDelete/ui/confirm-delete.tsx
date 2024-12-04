@@ -21,6 +21,7 @@ export const ConfirmDelete: FC<IConfirmDelete> = ({
 		<Modal
 			isOpen={isOpen}
 			onClose={onClose}
+			modalWidth='small'
 			title='Отправить запрос на удаление?'>
 			<Form name='form-confirm-delete' onSubmit={handleSubmit}>
 				<FormButtons>

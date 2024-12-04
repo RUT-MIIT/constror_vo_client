@@ -38,7 +38,9 @@ export function useForm<T>(
 		[validationSchema]
 	);
 
-	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (
+		event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+	) => {
 		const { name, value } = event.target;
 		setValues((prevValues) => ({
 			...prevValues,
