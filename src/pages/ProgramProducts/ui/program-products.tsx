@@ -10,7 +10,10 @@ import {
 
 import { getProgramNsiList } from '../../../store/catalog/actions';
 
-import { setIsShowProductWizard } from '../../../store/product/reducer';
+import {
+	setIsShowProductWizard,
+	setCurrentProduct,
+} from '../../../store/product/reducer';
 
 import { Section } from '../../../shared/components/Section/ui/section';
 import { Button } from '../../../shared/components/Button/ui/button';
@@ -49,6 +52,9 @@ export const ProgramProducts: FC = () => {
 
 	useEffect(() => {
 		fetchInitialData();
+		return () => {
+			dispatch(setCurrentProduct(null));
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -64,6 +70,7 @@ export const ProgramProducts: FC = () => {
 		<div className={styles.container}>
 			<Section
 				sectionWidth='full'
+				sectionHeight='card'
 				sectionTitle={{ text: 'Исходные данные' }}
 				sectionDescription='При помощи искусственного интеллекта, на основе методологии и описания предметной области создаются продукты программы
 и перечень НСИ, которые можно редактировать, удалять или добавлять.'>

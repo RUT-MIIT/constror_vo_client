@@ -73,7 +73,7 @@ export const ProgramProductsLevel: FC = () => {
 		<Level
 			title='Продукты программы'
 			count={productList.length}
-			icons={[{ icon: 'add', onClick: () => openAddProductModal() }]}>
+			icons={[{ icon: 'add', onClick: openAddProductModal }]}>
 			{productList.length > 0 ? (
 				<LevelList>
 					{productList.map((elem, i) => (

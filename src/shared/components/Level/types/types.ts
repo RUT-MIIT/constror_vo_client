@@ -6,6 +6,8 @@ export interface ILevelProps {
 	title?: string;
 	count?: number;
 	icons?: IIcon[];
+	isShow?: boolean;
+	onShow?: () => void;
 	children?: ReactNode;
 }
 

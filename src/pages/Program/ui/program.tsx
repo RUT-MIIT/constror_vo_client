@@ -9,6 +9,7 @@ import { EProgramRoutes } from '../lib/program-routes';
 
 import { ProgramInfo } from '../../ProgramInfo/ui/program-info';
 import { ProgramProducts } from '../../ProgramProducts/ui/program-products';
+import { ProgramReconstruction } from '../../ProgramReconstruction/ui/program-reconstruction';
 import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 
 export const Program: FC = () => {
@@ -40,6 +41,10 @@ export const Program: FC = () => {
 			<Route
 				path={`${EProgramRoutes.PRODUCTS}/*`}
 				element={<ProgramProducts />}
+			/>
+			<Route
+				path={`${EProgramRoutes.RECONSTRUCTION}/*`}
+				element={<ProgramReconstruction />}
 			/>
 		</Routes>
 	);

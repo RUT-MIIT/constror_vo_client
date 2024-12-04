@@ -40,6 +40,13 @@
 		background-repeat: no-repeat;
 		background-size: contain;
 	}
+	&.icon_icon_close.icon_color_grey {
+		background-color: inherit;
+		background-image: url('../../../images/icons/accent-grey/close.svg');
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
 	&.icon_icon_close.icon_color_white {
 		background-color: inherit;
 		background-image: url('../../../images/icons/main-white/close.svg');

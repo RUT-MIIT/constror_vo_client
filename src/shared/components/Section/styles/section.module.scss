@@ -6,11 +6,18 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 	&_width_default {
 		width: 414px;
 	}
 	&_width_full {
 		width: 100%;
+	}
+	&_height_page {
+		flex-grow: 1;
+	}
+	&_height_card {
+		flex-grow: 0;
 	}
 }
 
