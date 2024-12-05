@@ -4,6 +4,7 @@ import { programListSlice } from './programList/reducer';
 import { programDetailSlice } from './programDetail/reducer';
 import { productSlice } from './product/reducer';
 import { reconstructionSlice } from './reconstruction/reducer';
+import { discBasicSlice } from './discBasic/reducer';
 import { catalogSlice } from './catalog/reducer';
 
 export const rootReducer = combineSlices(
@@ -12,5 +13,6 @@ export const rootReducer = combineSlices(
 	programDetailSlice,
 	productSlice,
 	reconstructionSlice,
+	discBasicSlice,
 	catalogSlice
 );
