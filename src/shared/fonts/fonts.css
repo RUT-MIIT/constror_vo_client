@@ -1,4 +1,35 @@
 @font-face {
+	font-family: 'Helvetica';
+	src: local('Helvetica Light'), local('Helvetica-Light'),
+		url('Helvetica-Light.woff2') format('woff2'),
+		url('Helvetica-Light.woff') format('woff'),
+		url('Helvetica-Light.eot') format('eot'),
+		url('Helvetica-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Helvetica';
+	src: local('Helvetica'), local('Helvetica'),
+		url('Helvetica.woff2') format('woff2'),
+		url('Helvetica.woff') format('woff'),
+		url('Helvetica.eot') format('eot'),
+		url('Helvetica.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Helvetica';
+	src: local('Helvetica Bold'), local('Helvetica-Bold'),
+		url('Helvetica-Bold.woff2') format('woff2'),
+		url('Helvetica-Bold.woff') format('woff'),
+		url('Helvetica-Bold.eot') format('eot'),
+		url('Helvetica-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: 'Roboto';
 	src: local('Roboto Thin'), local('Roboto-Thin'),
 		url('Robotothin.woff2') format('woff2'),
