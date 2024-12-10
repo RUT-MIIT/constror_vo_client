@@ -1,7 +1,7 @@
 .button {
   margin: 0px;
   position: relative;
-  padding: 9px 11px;
+  padding: 7px 11px;
 	box-sizing: border-box;
   border: none;
   border-radius: var(--border-radius);
@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  line-height: 18px;
+  line-height: 1.5;
 	text-align: center;
   text-decoration: none;
   transition: all .3s ease-in-out;
@@ -31,15 +31,18 @@
 	}
 	&_style_default {
 		color: var(--main-white-color);
-		background: var(--accent-blue-color);
-		border: 2px solid var(--accent-blue-color);
+		background: var(--main-blue-color);
+		border: 2px solid var(--main-blue-color);
 		&:hover {
 			box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
 		}
 	}
 	&_style_magic {
 		color: var(--main-white-color);
-		background: linear-gradient(to right, #F05FC7, #925FF0);
+		background:
+    radial-gradient(circle at 50% -80%, #3C7AFF 30%, transparent 80%),
+    radial-gradient(circle at 50% 80%, #8647FF 30%, transparent 80%),
+    #4F15F3;
 		border: none;
 		box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.12);
 		padding: 11px;
@@ -47,12 +50,12 @@
 	&_style_cancel {
 		color: var(--main-black-color);
 		background: var(--main-white-color);
-		border: 2px solid var(--accent-grey-color);
+		border: 2px solid var(--main-grey-light-color);
 	}
 	&_block {
-		color: var(--accent-grey-color);
-		background: var(--main-grey-color);
-		border: 2px solid var(--main-grey-color);
+		color: var(--main-white-color);
+		background: var(--main-grey-light-color);
+		border: 2px solid var(--main-grey-light-color);
 		&:hover {
 			cursor: default;
 			user-select: none;

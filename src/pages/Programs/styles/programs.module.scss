@@ -18,12 +18,12 @@
 	flex-direction: column;
 	box-sizing: border-box;
 	background: var(--main-white-color);
-	border: 2px solid var(--main-grey-color);
+	border: 2px solid var(--main-grey-light-color);
 	border-radius: var(--border-radius);
 	box-shadow: 0 8px 12px -8px rgba(218, 221, 229, 0.9);
 	&_type_add {
 		border: none;
-		background: var(--accent-blue-color);
+		background: var(--main-blue-color);
 		box-shadow: 0 8px 12px -8px rgba(131, 122, 234, 0.9);
 	}
 }
@@ -53,7 +53,7 @@
 	color: var(--main-black-color);
 	transition: all .3s ease-in-out;
 	&:hover {
-		color: var(--accent-blue-color);
+		color: var(--main-blue-color);
 		cursor: pointer;
 	}
 }

@@ -75,7 +75,7 @@
 		font-style: normal;
 		font-weight: bold;
 		text-align: center;
-		color: var(--accent-grey-color);
+		color: var(--main-grey-color);
 	}
 	&_type_profile {
 		background-image: url('../../../shared/images/icons/menu/profile.svg');
@@ -98,11 +98,11 @@
 }
 
 .link:hover .icon__container {
-  background: var(--main-grey-color);
+  background: var(--accent-blue-light-color);
 }
 
 .link_active .icon__container {
-  background: var(--accent-blue-color);
+  background: var(--main-blue-color);
 }
 
 .link_active .icon__text {

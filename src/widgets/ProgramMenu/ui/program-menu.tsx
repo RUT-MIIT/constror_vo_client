@@ -5,6 +5,8 @@ import { useSelector } from '../../../store/store';
 
 import { EROUTES } from '../../../shared/utils/routes';
 
+import { Badge } from '../../../shared/components/Badge/ui/badge';
+
 import styles from '../styles/program-menu.module.scss';
 
 const links = [
@@ -25,12 +27,12 @@ const links = [
 	},
 	{
 		id: 'discipline-specialized',
-		title: 'Проф. дисциплины',
+		title: 'Проф. дисцип.',
 		description: 'Преобразование реконструкции деятельности в дисциплины',
 	},
 	{
 		id: 'discipline-basic',
-		title: 'Общепроф. дисциплины',
+		title: 'Общепроф. дисцип.',
 		description: 'Добавление общепрофессиональных дисцпилин',
 	},
 	{
@@ -58,6 +60,10 @@ export const ProgramMenu: FC = () => {
 
 	return (
 		<nav className={styles.nav}>
+			<div className={styles.header}>
+				<div className={styles.logo}></div>
+				<span className={styles.header__caption}>Конструтор ВО</span>
+			</div>
 			<ul className={styles.menu}>
 				{links.map((elem) => (
 					<li
@@ -67,19 +73,38 @@ export const ProgramMenu: FC = () => {
 							path.pathname.includes(elem.id) ? styles.item_active : ''
 						} `}
 						onClick={() => handleChangeSection(elem.id)}>
-						<div className={styles.icon__container}>
-							<div
-								className={`${styles.icon} ${
-									styles[`icon_type_${elem.id}`]
-								}`}></div>
-						</div>
 						<div className={styles.card}>
-							<h3 className={styles.title}>{elem.title}</h3>
-							<p className={styles.description}>{elem.description}</p>
+							<div className={styles.info}>
+								<div
+									className={`${styles.icon} ${
+										styles[`icon_type_${elem.id}`]
+									}`}></div>
+								<h3 className={styles.title}>{elem.title}</h3>
+							</div>
+							<Badge
+								text='В работе'
+								color={path.pathname.includes(elem.id) ? 'white' : 'blue'}
+							/>
 						</div>
 					</li>
 				))}
 			</ul>
+			<div className={styles.control}>
+				<div
+					className={styles.control__btn}
+					onClick={() => navigate(EROUTES.PROGRAMS)}>
+					<div
+						className={`${styles.control__icon} ${styles.control__icon_type_back}`}></div>
+					<p className={styles.control__title}>Вернуться в программы</p>
+				</div>
+				<div
+					className={styles.control__btn}
+					onClick={() => navigate(EROUTES.PROFILE)}>
+					<div
+						className={`${styles.control__icon} ${styles.control__icon_type_user}`}></div>
+					<p className={styles.control__title}>Личный кабинет</p>
+				</div>
+			</div>
 		</nav>
 	);
 };
