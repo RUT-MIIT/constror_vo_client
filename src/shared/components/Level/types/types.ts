@@ -23,6 +23,24 @@ export interface ILevelCardProps {
 	children?: ReactNode;
 }
 
+export interface ILevelItemProps {
+	id: number;
+	name: string;
+	badge?: {
+		text: string;
+		color: 'blue-dark' | 'blue-light' | 'blue' | 'green' | 'red' | 'grey';
+	};
+	mainColor?: 'blue' | 'grey' | 'default';
+	controlColor?: 'blue' | 'green' | 'red' | 'grey';
+	level?: 'first' | 'second' | 'third';
+	icons?: IIcon[];
+	isActive?: boolean;
+	isOpen?: boolean;
+	isBlock?: boolean;
+	onOpen?: (arg?: number | object) => void;
+	children?: ReactNode;
+}
+
 export interface ILevelListProps {
 	children?: ReactNode;
 }
