@@ -10,6 +10,7 @@ import { EProgramRoutes } from '../lib/program-routes';
 import { ProgramInfo } from '../../ProgramInfo/ui/program-info';
 import { ProgramProducts } from '../../ProgramProducts/ui/program-products';
 import { ProgramReconstruction } from '../../ProgramReconstruction/ui/program-reconstruction';
+import { ProgramDiscSpec } from '../../ProgramDiscSpec/ui/program-disc-spec';
 import { ProgramDiscBasic } from '../../ProgramDiscBasic/ui/program-disc-basic';
 import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 
@@ -46,6 +47,10 @@ export const Program: FC = () => {
 			<Route
 				path={`${EProgramRoutes.RECONSTRUCTION}/*`}
 				element={<ProgramReconstruction />}
+			/>
+			<Route
+				path={`${EProgramRoutes.DISC_SPEC}/*`}
+				element={<ProgramDiscSpec />}
 			/>
 			<Route
 				path={`${EProgramRoutes.DISC_BASIC}/*`}

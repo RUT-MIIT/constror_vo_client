@@ -33,13 +33,13 @@ export const ProgramDisciplineLevel: FC = () => {
 		dispatch(setIsShowModal({ modal: 'addDiscipline', isShow: true }));
 	};
 
-	const openEditDisciplineModal = (stage: IDisciplineBasic) => {
-		dispatch(setCurrentDiscipline(stage));
+	const openEditDisciplineModal = (discipline: IDisciplineBasic) => {
+		dispatch(setCurrentDiscipline(discipline));
 		dispatch(setIsShowModal({ modal: 'editDiscipline', isShow: true }));
 	};
 
-	const openRemoveDisciplineModal = (stage: IDisciplineBasic) => {
-		dispatch(setCurrentDiscipline(stage));
+	const openRemoveDisciplineModal = (discipline: IDisciplineBasic) => {
+		dispatch(setCurrentDiscipline(discipline));
 		dispatch(setIsShowModal({ modal: 'removeDiscipline', isShow: true }));
 	};
 
