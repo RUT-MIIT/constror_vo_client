@@ -31,7 +31,7 @@ export interface ILevelItemProps {
 		color: 'blue-dark' | 'blue-light' | 'blue' | 'green' | 'red' | 'grey';
 	};
 	mainColor?: 'blue' | 'grey' | 'default';
-	controlColor?: 'blue' | 'green' | 'red' | 'grey';
+	controlColor?: 'blue' | 'green' | 'red' | 'grey' | 'default';
 	level?: 'first' | 'second' | 'third';
 	icons?: IIcon[];
 	isActive?: boolean;

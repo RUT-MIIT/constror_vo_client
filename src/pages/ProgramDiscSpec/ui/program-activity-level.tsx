@@ -99,7 +99,7 @@ export const ProgramActivityLevel: FC = () => {
 						text: `Процесс ${processIndex + 1}`,
 						color: 'blue-light',
 					}}
-					controlColor='red'
+					controlColor='default'
 					level='third'
 					icons={[]}
 				/>
@@ -115,7 +115,7 @@ export const ProgramActivityLevel: FC = () => {
 							text: `Этап ${stageIndex + 1}`,
 							color: 'blue',
 						}}
-						controlColor='red'
+						controlColor='default'
 						level='second'
 						icons={[]}
 					/>

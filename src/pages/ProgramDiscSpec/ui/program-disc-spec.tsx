@@ -1,21 +1,26 @@
 import type { FC } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../store/store';
+
+import { EROUTES } from '../../../shared/utils/routes';
 
 import { getInitialData } from '../../../store/discSpec/actions';
 
 import { setIsShowLevel } from '../../../store/discSpec/reducer';
 
-import { Section } from '../../../shared/components/Section/ui/section';
+import { Section, SectionImg } from '../../../shared/components/Section';
 import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 import { ProgramDisciplineLevel } from './program-discipline-level';
 import { ProgramActivityLevel } from './program-activity-level';
 import { ProgramReconstructionLevel } from './program-reconstruction-level';
+import { Button } from '../../../shared/components/Button/ui/button';
 
 import styles from '../styles/program-disc-spec.module.scss';
 
 export const ProgramDiscSpec: FC = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { program } = useSelector((state) => state.programDetail);
 
@@ -49,6 +54,29 @@ export const ProgramDiscSpec: FC = () => {
 
 	return (
 		<div className={styles.container}>
+			<SectionImg
+				sectionWidth='full'
+				sectionTitle={{ text: 'Профессиональные дисциплины' }}
+				sectionDescription='Процесс последовательного проектирования деятельностей и дисицплин с использованием искусственного интеллекта, направленный на оптимизацию работы за счёт поэтапного заполнения данных и автоматической генерации решений.'>
+				<div className={styles.buttons}>
+					<Button
+						width='auto'
+						text='Создать профессиольные дисциплины'
+						isBlock={true}
+					/>
+					{program ? (
+						<Button
+							text='Следующий этап'
+							style='light'
+							onClick={() =>
+								navigate(`${EROUTES.PROGRAM}/${program.id}/discipline-basic`)
+							}
+						/>
+					) : (
+						<Button text='Следующий этап' isBlock={true} />
+					)}
+				</div>
+			</SectionImg>
 			<Section
 				sectionWidth='full'
 				sectionTitle={{

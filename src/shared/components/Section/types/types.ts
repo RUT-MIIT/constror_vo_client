@@ -8,6 +8,13 @@ export interface ISectionProps {
 	children?: ReactNode;
 }
 
+export interface ISectionImgProps {
+	sectionWidth?: 'default' | 'full' | 'large' | 'small';
+	sectionTitle?: ISectionTitle;
+	sectionDescription?: string;
+	children?: ReactNode;
+}
+
 interface ISectionTitle {
 	text: string;
 	size?: 'default' | 'large' | 'small';

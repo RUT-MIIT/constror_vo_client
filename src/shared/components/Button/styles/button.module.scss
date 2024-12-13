@@ -1,7 +1,8 @@
 .button {
   margin: 0px;
   position: relative;
-  padding: 7px 11px;
+  padding: 10px 16px;
+	border: 2px solid var(--main-black-color);
 	box-sizing: border-box;
   border: none;
   border-radius: var(--border-radius);
@@ -9,9 +10,9 @@
 	color: var(--main-black-color);
 	outline: none;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1;
 	text-align: center;
   text-decoration: none;
   transition: all .3s ease-in-out;
@@ -23,6 +24,9 @@
 	}
 	&_width_full {
 		width: 100%;
+	}
+	&_width_auto {
+		width: auto;
 	}
 	&_width_default {
 		max-width: 216px;
@@ -44,8 +48,13 @@
     radial-gradient(circle at 50% 80%, #8647FF 30%, transparent 80%),
     #4F15F3;
 		border: none;
+		padding: 12px 11px;
 		box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.12);
-		padding: 11px;
+	}
+	&_style_light {
+		color: var(--main-white-color);
+		background: var(--main-blue-light-color);
+		border: 2px solid var(--main-blue-light-color);
 	}
 	&_style_cancel {
 		color: var(--main-black-color);
@@ -53,13 +62,12 @@
 		border: 2px solid var(--main-grey-light-color);
 	}
 	&_block {
-		color: var(--main-white-color);
-		background: var(--main-grey-light-color);
-		border: 2px solid var(--main-grey-light-color);
+		color: var(--main-grey-light-color);
+		background: var(--inactive-color);
+		border: 2px solid var(--inactive-color);
+		cursor: default;
 		&:hover {
 			cursor: default;
-			user-select: none;
-			pointer-events: none;
 			opacity: 1;
 		}
 	}

@@ -1,13 +1,15 @@
 import type { FC } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../store/store';
+
+import { EROUTES } from '../../../shared/utils/routes';
 
 import {
 	getInitialData,
 	getProductsWizardData,
 } from '../../../store/product/actions';
-
 import { getProgramNsiList } from '../../../store/catalog/actions';
 
 import {
@@ -15,7 +17,7 @@ import {
 	setCurrentProduct,
 } from '../../../store/product/reducer';
 
-import { Section } from '../../../shared/components/Section/ui/section';
+import { Section, SectionImg } from '../../../shared/components/Section';
 import { Button } from '../../../shared/components/Button/ui/button';
 import { Modal } from '../../../shared/components/Modal/ui/modal';
 import { ProgramProductsLevel } from './program-products-level';
@@ -26,6 +28,7 @@ import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 import styles from '../styles/program-products.module.scss';
 
 export const ProgramProducts: FC = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { program } = useSelector((state) => state.programDetail);
 	const { isShowProductWizard } = useSelector((state) => state.product);
@@ -68,21 +71,31 @@ export const ProgramProducts: FC = () => {
 
 	return (
 		<div className={styles.container}>
-			<Section
+			<SectionImg
 				sectionWidth='full'
-				sectionHeight='card'
 				sectionTitle={{ text: 'Исходные данные' }}
 				sectionDescription='При помощи искусственного интеллекта, на основе методологии и описания предметной области создаются продукты программы
 и перечень НСИ, которые можно редактировать, удалять или добавлять.'>
-				<Button
-					text='Создать продукты'
-					style='magic'
-					onClick={openProductWizard}
-				/>
-			</Section>
-			<Section
-				sectionWidth='full'
-				sectionTitle={{ text: 'Подбор исходных данных' }}>
+				<div className={styles.buttons}>
+					<Button
+						text='Создать продукты'
+						style='magic'
+						onClick={openProductWizard}
+					/>
+					{program ? (
+						<Button
+							text='Следующий этап'
+							style='light'
+							onClick={() =>
+								navigate(`${EROUTES.PROGRAM}/${program.id}/reconstruction`)
+							}
+						/>
+					) : (
+						<Button text='Следующий этап' isBlock={true} />
+					)}
+				</div>
+			</SectionImg>
+			<Section sectionWidth='full'>
 				<div className={styles.levels}>
 					<ProgramProductsLevel />
 					<ProgramNsiLevel />
