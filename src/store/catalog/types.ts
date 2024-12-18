@@ -20,6 +20,11 @@ export interface IProgramRole {
 	name: string;
 }
 
+export interface IDisciplineForm {
+	id: number;
+	name: string;
+}
+
 export interface IUser {
 	id: number;
 	name: string;

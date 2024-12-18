@@ -86,7 +86,7 @@ export const ProgramProcessesLevel: FC = () => {
 							name={elem.name}
 							id={elem.id}
 							key={elem.id}
-							badges={[{ text: `Этап ${i + 1}` }]}
+							badges={[{ text: `Процесс ${i + 1}` }]}
 							icons={[
 								{ icon: 'edit', onClick: () => openEditProcessModal(elem) },
 								{ icon: 'delete', onClick: () => openRemoveProcessModal(elem) },

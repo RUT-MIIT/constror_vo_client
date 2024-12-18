@@ -10,6 +10,7 @@ import { Form } from '../../../shared/components/Form/ui/form';
 import {
 	FormField,
 	FormInput,
+	FormTextarea,
 	FormButtons,
 } from '../../../shared/components/Form/components';
 import { Button } from '../../../shared/components/Button/ui/button';
@@ -25,7 +26,10 @@ export const EditProductForm: FC = () => {
 
 	const [isBlockSubmit, setIsBlockSubmit] = useState<boolean>(true);
 	const { values, handleChange, errors } = useForm<IEditProductValues>(
-		{ name: currentProduct?.name || '' },
+		{
+			name: currentProduct?.name || '',
+			description: currentProduct?.description || '',
+		},
 		validationSchema
 	);
 
@@ -34,6 +38,7 @@ export const EditProductForm: FC = () => {
 		if (!isBlockSubmit) {
 			const newProduct = {
 				name: values.name,
+				description: values.description,
 			};
 			if (program && currentProduct) {
 				dispatch(
@@ -72,6 +77,19 @@ export const EditProductForm: FC = () => {
 					isShow: !!errors.name,
 				}}>
 				<FormInput name='name' value={values.name} onChange={handleChange} />
+			</FormField>
+			<FormField
+				title='Краткое описание:'
+				fieldError={{
+					text: errors.description || '',
+					isShow: !!errors.description,
+				}}>
+				<FormTextarea
+					name='description'
+					value={values.description}
+					onChange={handleChange}
+					placeholder='Введите краткое описание продукта'
+				/>
 			</FormField>
 			<FormButtons>
 				<Button

@@ -28,6 +28,14 @@ export interface IFormInputProps {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface IFormInputNumberProps {
+	type?: 'number';
+	name: string;
+	placeholder?: string;
+	value: number | null;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
 export interface IFormTextareaProps {
 	name: string;
 	placeholder?: string;
