@@ -1,7 +1,7 @@
 export interface IButtonProps {
 	type?: 'button' | 'submit';
 	width?: 'full' | 'large' | 'medium' | 'small' | 'auto';
-	style?: 'default' | 'cancel' | 'magic' | 'light';
+	style?: 'default' | 'cancel' | 'magic' | 'light' | 'delete';
 	form?: string;
 	isBlock?: boolean;
 	text: string;

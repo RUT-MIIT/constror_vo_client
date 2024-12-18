@@ -1,5 +1,6 @@
 export interface IAddProductValues {
 	name: string;
+	description: string;
 }
 
 export interface IAddNsiValues {
@@ -8,6 +9,7 @@ export interface IAddNsiValues {
 
 export interface IEditProductValues {
 	name: string;
+	description: string;
 }
 
 export interface IEditNsiValues {
