@@ -1,0 +1,167 @@
+.container {
+	margin: 0;
+	width: 100%;
+}
+
+.title {
+	margin: 0 0 40px;
+	font-size: 40px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 1.15;
+	text-align: left;
+	color: var(--main-black-color);
+}
+
+.spiral {
+	width: 1280px;
+	height: 100%;
+	position: fixed;
+	bottom: -160px;
+	right: -120px;
+	background-image: url('../../../../../shared/images/spiral.svg');
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: contain;
+	z-index: 0;
+}
+
+.list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	z-index: 5;
+}
+
+.item {
+	margin: 0;
+	padding: 20px 20px 24px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	border-radius: 12px;
+	position: relative;
+	transition: all 0.3s ease-in-out;
+	z-index: 5;
+}
+
+.item:hover {
+	cursor: pointer;
+	opacity: .7;
+}
+
+.item_color_dark {
+	background-color: var(--accent-blue-color);
+}
+
+.item_color_normal {
+	background-color: #435498;
+}
+
+.item_color_light {
+	background-color: #EA0A2A;
+}
+
+.count {
+	position: absolute;
+	bottom: -40px;
+	right: 12px;
+	color: rgba(255 255 255 / 20%);
+	font-size: 216px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	transition: all 0.3s ease-in-out;
+}
+
+.icon_container {
+	margin: 0 0 16px;
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #ffffff;
+	border-radius: 50%;
+}
+
+.icon {
+	margin: 0;
+	width: 30px;
+	height: 30px;
+}
+
+.icon_type_strategy {
+	background-image: url('../../../../../shared/images/product/strategy.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.icon_type_social {
+	background-image: url('../../../../../shared/images/product/social.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.icon_type_report {
+	background-image: url('../../../../../shared/images/product/report.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.icon_type_politic {
+	background-image: url('../../../../../shared/images/product/politic.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.icon_type_energy {
+	background-image: url('../../../../../shared/images/product/energy.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.icon_type_ecology {
+	background-image: url('../../../../../shared/images/product/ecology.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.icon_type_certificate {
+	background-image: url('../../../../../shared/images/product/certificate.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.name {
+	margin: 0 0 24px;
+	color: var(--main-white-color);
+	font-size: 18px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 1.15;
+	transition: all 0.3s ease-in-out;
+	z-index: 2;
+}
+
+.nsi {
+	color: #ffffff;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1.15;
+	text-transform: uppercase;
+	transition: all 0.3s ease-in-out;
+	z-index: 2;
+}

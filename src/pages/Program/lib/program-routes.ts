@@ -4,5 +4,6 @@ export enum EProgramRoutes {
 	RECONSTRUCTION = '/reconstruction',
 	DISC_SPEC = '/discipline-specialized',
 	DISC_BASIC = '/discipline-basic',
-	EDU_PLAN = 'education-plan',
+	EDU_PLAN = '/education-plan',
+	DESIGN = '/design-plan',
 }

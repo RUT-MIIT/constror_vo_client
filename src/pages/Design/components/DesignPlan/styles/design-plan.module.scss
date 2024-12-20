@@ -1,0 +1,71 @@
+.container {
+	margin: 0;
+	width: 100%;
+}
+
+.title {
+	margin: 0 0 12px;
+	font-size: 40px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 1.15;
+	text-align: left;
+	color: var(--main-black-color);
+}
+
+.tableWrapper {
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+.table {
+  border-collapse: collapse;
+	border: 1px solid #e5e5e5;
+  width: 100%;
+	overflow: hidden;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: #041A76;
+  color: #ffffff;
+  z-index: 1;
+}
+
+.semesterHeader {
+	width: 40px;
+  position: sticky;
+  top: 41px;
+  background-color: #041A76;
+  color: #ffffff;
+  z-index: 1;
+	text-align: center;
+}
+
+.headerAlign {
+	text-align: center;
+}
+
+.table_text_bold {
+	font-weight: bold;
+	background-color: #435498;
+	color: #ffffff;
+}
+
+.table_star {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	background-color: #EA0A2A;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 1;
+	text-align: center;
+	color: #ffffff;
+}

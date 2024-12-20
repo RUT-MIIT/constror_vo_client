@@ -58,7 +58,7 @@
 		"test": "yarn stylelint:fix && yarn lint && yarn format"
 	},
 	"dependencies": {
-		"@balkangraph/orgchart.js": "^8.14.54",
+		"@balkangraph/orgchart.js": "^8.14.62",
 		"@reduxjs/toolkit": "^2.2.7",
 		"@types/react-router-dom": "^5.3.3",
 		"clsx": "^2.1.0",

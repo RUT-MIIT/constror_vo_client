@@ -7,6 +7,7 @@ import { reconstructionSlice } from './reconstruction/reducer';
 import { discSpecSlice } from './discSpec/reducer';
 import { discBasicSlice } from './discBasic/reducer';
 import { educationPlanSlice } from './educationPlan/reducer';
+import { designSlice } from './design/reducer';
 import { catalogSlice } from './catalog/reducer';
 
 export const rootReducer = combineSlices(
@@ -18,5 +19,6 @@ export const rootReducer = combineSlices(
 	discSpecSlice,
 	discBasicSlice,
 	educationPlanSlice,
+	designSlice,
 	catalogSlice
 );

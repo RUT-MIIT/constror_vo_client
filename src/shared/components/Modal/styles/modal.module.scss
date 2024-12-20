@@ -13,7 +13,7 @@
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	text-rendering: optimizeLegibility;
-	z-index: 1;
+	z-index: 100;
 	&_opened {
 		opacity: 1;
 		visibility: visible;
@@ -50,6 +50,9 @@
 	&_width_default {
 		max-width: 720px;
 	}
+	&_width_large {
+		max-width: 1000px;
+	}
 	&_width_wizard {
 		margin: 8vh 24px 0 auto;
 		max-width: 82vw;
@@ -82,7 +85,7 @@
 }
 
 .title {
-	margin: 0;
+	margin: 0 0 12px 0;
 	width: 100%;
 	font-size: 22px;
 	font-style: normal;
@@ -93,7 +96,7 @@
 }
 
 .description {
-	margin: 12px 0 0 0;
+	margin: 0 0 12px 0;
 	width: 100%;
 	font-size: 16px;
 	font-style: normal;
