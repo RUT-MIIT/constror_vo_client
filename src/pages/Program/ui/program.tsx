@@ -13,6 +13,7 @@ import { ProgramReconstruction } from '../../ProgramReconstruction/ui/program-re
 import { ProgramDiscSpec } from '../../ProgramDiscSpec/ui/program-disc-spec';
 import { ProgramDiscBasic } from '../../ProgramDiscBasic/ui/program-disc-basic';
 import { ProgramEduPlan } from '../../ProgramEduPlan/ui/program-edu-plan';
+import { ProgramDesign } from '../../ProgramDesign/ui/program-design';
 import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 
 export const Program: FC = () => {
@@ -61,6 +62,7 @@ export const Program: FC = () => {
 				path={`${EProgramRoutes.EDU_PLAN}/*`}
 				element={<ProgramEduPlan />}
 			/>
+			<Route path={`${EProgramRoutes.DESIGN}/*`} element={<ProgramDesign />} />
 		</Routes>
 	);
 };

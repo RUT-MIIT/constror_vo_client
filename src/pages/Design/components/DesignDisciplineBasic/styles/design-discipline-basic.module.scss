@@ -1,0 +1,165 @@
+.container {
+	margin: 0;
+	width: 100%;
+}
+
+.title {
+	margin: 0 0 12px;
+	font-size: 40px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 1.15;
+	text-align: left;
+	color: var(--main-black-color);
+}
+
+.spyrale {
+	width: 1280px;
+	height: 100%;
+	position: fixed;
+	top: -120px;
+	left: -120px;
+	background-image: url('../../../../../shared/images/spiral.svg');
+	background-position: top;
+	background-repeat: no-repeat;
+	background-size: contain;
+	z-index: 0;
+	transform: rotate(90deg);
+}
+
+.codes {
+	margin: 20px 0 0;
+	padding: 0;
+	list-style-type: none;
+	width: 100%;
+	display: flex;
+	align-items: stretch;
+	gap: 24px;
+}
+
+.code {
+	margin: 0;
+	padding: 16px 20px;
+	box-sizing: border-box;
+	width: 100%;
+	background-color: var(--accent-blue-color);;
+	border-radius: 12px;
+	z-index: 3;
+}
+
+.code:hover {
+	cursor: pointer;
+	opacity: .7;
+}
+
+.code_dark-blue {
+	background-color: var(--accent-blue-color);
+}
+
+.code_light-blue {
+	background-color: #435498;
+}
+
+.code_red {
+	background-color: #EA0A2A;
+}
+
+.code_disabled {
+	background-color: #E1E4E8;
+}
+
+.code_text {
+	margin: 0;
+	color: #ffffff;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 1.15;
+}
+
+.code_disabled .code_text {
+	color: #000000;
+}
+
+.code_text_bold {
+	font-weight: bold;
+}
+
+.list {
+	margin: 24px 0 0;
+	padding: 0;
+	list-style-type: none;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 24px;
+	z-index: 3;
+}
+
+.item {
+	margin: 0;
+	padding: 16px 20px;
+	box-sizing: border-box;
+	width: 100%;
+	border-radius: 12px;
+	position: relative;
+	background-color: var(--main-blue-color);
+	z-index: 3;
+}
+
+.item:hover {
+	cursor: pointer;
+	opacity: .7;
+}
+
+.item_dark-blue {
+	background-color: var(--accent-blue-color);
+}
+
+.item_light-blue {
+	background-color: #435498;
+}
+
+.item_red {
+	background-color: #EA0A2A;
+}
+
+.tag {
+	margin: 0;
+	color: #E8F6FD;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 1.15;
+}
+
+.name {
+	margin: 24px 0 0;
+	max-width: 90%;
+	color: var(--main-white-color);
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 1.15;
+}
+
+.caption {
+	margin: 24px 0 0;
+	max-width: 70%;
+	color: var(--main-white-color);
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 1.15;
+}
+
+.count {
+	position: absolute;
+	bottom: -40px;
+	right: 12px;
+	color: rgba(255 255 255 / 20%);
+	font-size: 216px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	transition: all 0.3s ease-in-out;
+}

@@ -1,6 +1,7 @@
 export enum EROUTES {
 	HOME = '/',
 	MAIN = '/main',
+	DESIGN = '/design',
 	LOGIN = '/login',
 	REGISTRATION = '/registration',
 	FORGOT_PASSWORD = '/forgot-password',
@@ -9,4 +10,17 @@ export enum EROUTES {
 	PROGRAMS = '/programs',
 	PROGRAM = '/program',
 	NOT_FOUND = '*',
+}
+
+export enum EROUTESDESIGN {
+	MAIN = '/main',
+	TEAM = '/team',
+	MARKET = '/market',
+	PRODUCT = '/product',
+	RECONSTRUCTION = '/reconstruction',
+	DISCIPLINE_SPEC = '/discipline-spec',
+	DISCIPLINE_BASIC = '/discipline-basic',
+	GRADUATE = '/graduate',
+	PLAN = '/plan',
+	ANNOTATION = '/annotation',
 }

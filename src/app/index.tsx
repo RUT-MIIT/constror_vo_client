@@ -12,6 +12,7 @@ import { Registration } from '../pages/Registration/ui/registration';
 import { ForgotPassword } from '../pages/ForgotPassword/ui/forgot-password';
 import { NotFound } from '../pages/NotFound/ui/not-found';
 import { Main } from '../pages/Main/ui/main';
+import { Design } from '../pages/Design/ui/design';
 
 import { EROUTES } from '../shared/utils/routes';
 import { checkUserAuth } from '../store/user/actions';
@@ -51,7 +52,8 @@ export const App = () => {
 					path={`${EROUTES.HOME}*`}
 					element={<OnlyAuth component={<Main />} />}
 				/>
-				<Route path={EROUTES.NOT_FOUND} element={<NotFound />} /> NotFound
+				<Route path={`${EROUTES.DESIGN}/:programId/*`} element={<Design />} />
+				<Route path={EROUTES.NOT_FOUND} element={<NotFound />} />
 			</Routes>
 			<div id='modal-root'></div>
 		</div>

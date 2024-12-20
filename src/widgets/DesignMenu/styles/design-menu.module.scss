@@ -1,0 +1,260 @@
+.menu {
+	width: 100%;
+	margin: 0;
+	max-width: 300px;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid var(--slider-color);
+	background-color: #ffffff;
+	z-index: 10;
+}
+
+.header {
+	width: 100%;
+	margin: 0;
+	padding: 24px 22px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+}
+
+.header__logo {
+	margin: 0;
+	width: 100%;
+	height: 40px;
+	background-image: url('../../../shared/images/logo-transport.svg');
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.header__text {
+	margin: 0;
+	color: var(--main-black-color);
+	font-size: 24px;
+	line-height: 1.15;
+	font-weight: bold;
+}
+
+.nav {
+	margin: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.section {
+	margin: 0;
+	padding: 12px 22px;
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	margin: 0;
+	color: var(--main-black-color);
+	font-size: 14px;
+	line-height: 1.15;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.list {
+	margin: 12px 0 0;
+	padding: 0;
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+}
+
+.item {
+	width: 100%;
+	margin: 0 0 2px;
+}
+
+.item__link {
+	width: 100%;
+	padding: 16px 12px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	border-radius: 8px;
+	background-color: transparent;
+	transition: all 0.3s ease-in-out;
+}
+
+.item__link_active {
+	width: 100%;
+	padding: 16px 12px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	border-radius: 8px;
+	background-color: var(--accent-blue-color);
+	transition: all 0.3s ease-in-out;
+}
+
+.item__link:hover {
+	cursor: pointer;
+	background-color: var(--accent-blue-light-color);
+}
+
+.item:last-of-type {
+	margin: 0;
+}
+
+.item__icon {
+	margin: 0 12px 0 0;
+	width: 18px;
+	height: 18px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	transition: all 0.3s ease-in-out;
+}
+
+.item__icon_type_home {
+	background-image: url('../../../shared/images/navigation/home-black.png');
+}
+
+.item__link_active .item__icon_type_home {
+	background-image: url('../../../shared/images/navigation/home-white.png');
+}
+
+.item__link:hover .item__icon_type_home {
+	background-image: url('../../../shared/images/navigation/home-color.png');
+}
+
+.item__icon_type_term {
+	background-image: url('../../../shared/images/navigation/term-black.png');
+}
+
+.item__link_active .item__icon_type_term {
+	background-image: url('../../../shared/images/navigation/term-white.png');
+}
+
+.item__link:hover .item__icon_type_term {
+	background-image: url('../../../shared/images/navigation/term-color.png');
+}
+
+.item__icon_type_analyze {
+	background-image: url('../../../shared/images/navigation/analyze-black.png');
+}
+
+.item__link_active .item__icon_type_analyze {
+	background-image: url('../../../shared/images/navigation/analyze-white.png');
+}
+
+.item__link:hover .item__icon_type_analyze {
+	background-image: url('../../../shared/images/navigation/analyze-color.png');
+}
+
+.item__icon_type_reconstruction {
+	background-image: url('../../../shared/images/navigation/reconstruction-black.png');
+}
+
+.item__link_active .item__icon_type_reconstruction {
+	background-image: url('../../../shared/images/navigation/reconstruction-white.png');
+}
+
+.item__link:hover .item__icon_type_reconstruction {
+	background-image: url('../../../shared/images/navigation/reconstruction-color.png');
+}
+
+.item__icon_type_team {
+	background-image: url('../../../shared/images/navigation/team-black.png');
+}
+
+.item__link_active .item__icon_type_team {
+	background-image: url('../../../shared/images/navigation/team-white.png');
+}
+
+.item__link:hover .item__icon_type_team {
+	background-image: url('../../../shared/images/navigation/team-color.png');
+}
+
+.item__icon_type_plan {
+	background-image: url('../../../shared/images/navigation/plan-black.png');
+}
+
+.item__link_active .item__icon_type_plan {
+	background-image: url('../../../shared/images/navigation/plan-white.png');
+}
+
+.item__link:hover .item__icon_type_plan {
+	background-image: url('../../../shared/images/navigation/plan-color.png');
+}
+
+.item__icon_type_annotation {
+	background-image: url('../../../shared/images/navigation/annotation-black.png');
+}
+
+.item__link_active .item__icon_type_annotation {
+	background-image: url('../../../shared/images/navigation/annotation-white.png');
+}
+
+.item__link:hover .item__icon_type_annotation {
+	background-image: url('../../../shared/images/navigation/annotation-color.png');
+}
+
+.item__icon_type_discipline-qual {
+	background-image: url('../../../shared/images/navigation/discipline-qual-black.png');
+}
+
+.item__link_active .item__icon_type_discipline-qual {
+	background-image: url('../../../shared/images/navigation/discipline-qual-white.png');
+}
+
+.item__link:hover .item__icon_type_discipline-qual {
+	background-image: url('../../../shared/images/navigation/discipline-qual-color.png');
+}
+
+.item__icon_type_discipline-main {
+	background-image: url('../../../shared/images/navigation/discipline-main-black.png');
+}
+
+.item__link_active .item__icon_type_discipline-main {
+	background-image: url('../../../shared/images/navigation/discipline-main-white.png');
+}
+
+.item__link:hover .item__icon_type_discipline-main {
+	background-image: url('../../../shared/images/navigation/discipline-main-color.png');
+}
+
+.item__icon_type_product {
+	background-image: url('../../../shared/images/navigation/product-black.png');
+}
+
+.item__link_active .item__icon_type_product {
+	background-image: url('../../../shared/images/navigation/product-white.png');
+}
+
+.item__link:hover .item__icon_type_product {
+	background-image: url('../../../shared/images/navigation/product-color.png');
+}
+
+.item__text {
+	margin: 2px 0 0;
+	color: var(--main-black-color);
+	font-size: 14px;
+	line-height: 1;
+	font-weight: bold;
+	transition: all 0.3s ease-in-out;
+}
+
+.item__link_active .item__text {
+	color: var(--main-white-color);
+}
+
+.item__link:hover .item__text {
+	color: var(--accent-blue-color);
+}
+
