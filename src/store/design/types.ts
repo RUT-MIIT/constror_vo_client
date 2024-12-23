@@ -16,6 +16,7 @@ export interface IDesignMain {
 	profile: string;
 	direction: IEducationDirection;
 	level: IEducationLevel;
+	annotation: string;
 }
 
 export interface IDesignProduct {

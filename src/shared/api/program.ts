@@ -2,6 +2,7 @@ import type {
 	IAddParticipantRequest,
 	IEditParticipantRequest,
 	IRemoveParticipantRequest,
+	IEditAnnotationRequest,
 } from '../../store/programDetail/types';
 
 import { request } from './utils';
@@ -62,4 +63,19 @@ export const removeParticipant = ({
 			},
 		}
 	);
+};
+
+export const editAnnotation = ({
+	programId,
+	program,
+}: IEditAnnotationRequest) => {
+	return request(`/programs/${programId}/`, {
+		method: 'PATCH',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('accessToken') || ''}`,
+		},
+		body: JSON.stringify({ program: program }),
+	});
 };

@@ -12,12 +12,8 @@ import styles from '../styles/design-discipline-spec.module.scss';
 export const DesignDisciplineSpec: FC = () => {
 	const { disciplineSpec } = useSelector((state) => state.design);
 
-	const [currentProduct, setCurrentProduct] = useState<INode>(
-		disciplineSpec[0].nodes[0]
-	);
-	const [currentNodes, setCurrentNodes] = useState<INode[]>(
-		disciplineSpec[0].nodes
-	);
+	const [currentProduct, setCurrentProduct] = useState<INode | null>(null);
+	const [currentNodes, setCurrentNodes] = useState<INode[]>([]);
 
 	const handleSelectProduct = (item: INode) => {
 		setCurrentProduct(item);
@@ -30,21 +26,28 @@ export const DesignDisciplineSpec: FC = () => {
 	};
 
 	useEffect(() => {
-		setCurrentNodes(disciplineSpec[0].nodes);
-		setCurrentProduct(disciplineSpec[0].nodes[0]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		if (disciplineSpec.length > 0 && disciplineSpec[0].nodes.length > 0) {
+			setCurrentNodes(disciplineSpec[0].nodes);
+			setCurrentProduct(disciplineSpec[0].nodes[0]);
+		}
+	}, [disciplineSpec]);
 
 	return (
 		<div className={styles.container}>
 			<h2 className={styles.title}>Проектирование ПД</h2>
-			<p className={styles.subtitle}>продукт «{currentProduct.name}»</p>
-			<SelectProductChart
-				products={disciplineSpec.map((elem) => elem.nodes[0])}
-				currentProduct={currentProduct}
-				onSelect={handleSelectProduct}
-			/>
-			<OrgChart nodes={currentNodes} layout='normal' type='discipline' />
+			{currentProduct && (
+				<>
+					<p className={styles.subtitle}>продукт «{currentProduct.name}»</p>
+					<SelectProductChart
+						products={disciplineSpec.map((elem) => elem.nodes[0])}
+						currentProduct={currentProduct}
+						onSelect={handleSelectProduct}
+					/>
+				</>
+			)}
+			{currentNodes.length > 0 && (
+				<OrgChart nodes={currentNodes} layout='normal' type='discipline' />
+			)}
 		</div>
 	);
 };

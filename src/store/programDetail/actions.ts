@@ -3,6 +3,7 @@ import type {
 	IAddParticipantRequest,
 	IEditParticipantRequest,
 	IRemoveParticipantRequest,
+	IEditAnnotationRequest,
 } from './types';
 import type { IParticipant } from '../programList/types';
 
@@ -29,3 +30,8 @@ export const removeParticipantFromList = createAsyncThunk<
 	IParticipant[],
 	IRemoveParticipantRequest
 >('programDetail/removeParticipant', api.removeParticipant);
+
+export const editProgramAnnotation = createAsyncThunk<
+	IProgramDetail,
+	IEditAnnotationRequest
+>('programDetail/editAnnotation', api.editAnnotation);

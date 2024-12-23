@@ -74,6 +74,11 @@ export const programDetailSlice = createSlice({
 					state.program.participants = action.payload;
 					state.isRemoveParticipant = false;
 				}
+			})
+			.addCase(actions.editProgramAnnotation.fulfilled, (state, action) => {
+				if (state.program) {
+					state.program.annotation = action.payload.annotation;
+				}
 			});
 	},
 });

@@ -12,12 +12,8 @@ import styles from '../styles/design-reconstruction.module.scss';
 export const DesignReconstruction: FC = () => {
 	const { reconstruction } = useSelector((state) => state.design);
 
-	const [currentProduct, setCurrentProduct] = useState<INode>(
-		reconstruction[0].nodes[0]
-	);
-	const [currentNodes, setCurrentNodes] = useState<INode[]>(
-		reconstruction[0].nodes
-	);
+	const [currentProduct, setCurrentProduct] = useState<INode | null>(null);
+	const [currentNodes, setCurrentNodes] = useState<INode[]>([]);
 
 	const handleSelectProduct = (item: INode) => {
 		setCurrentProduct(item);
@@ -25,21 +21,28 @@ export const DesignReconstruction: FC = () => {
 	};
 
 	useEffect(() => {
-		setCurrentNodes(reconstruction[0].nodes);
-		setCurrentProduct(reconstruction[0].nodes[0]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		if (reconstruction.length > 0 && reconstruction[0].nodes.length > 0) {
+			setCurrentNodes(reconstruction[0].nodes);
+			setCurrentProduct(reconstruction[0].nodes[0]);
+		}
+	}, [reconstruction]);
 
 	return (
 		<div className={styles.container}>
 			<h2 className={styles.title}>Реконструкция деятельности</h2>
-			<p className={styles.subtitle}>продукт «{currentProduct.name}»</p>
-			<SelectProductChart
-				products={reconstruction.map((elem) => elem.nodes[0])}
-				currentProduct={currentProduct}
-				onSelect={handleSelectProduct}
-			/>
-			<OrgChart nodes={currentNodes} layout='mixed' type='default' />
+			{currentProduct && (
+				<>
+					<p className={styles.subtitle}>продукт «{currentProduct.name}»</p>
+					<SelectProductChart
+						products={reconstruction.map((elem) => elem.nodes[0])}
+						currentProduct={currentProduct}
+						onSelect={handleSelectProduct}
+					/>
+				</>
+			)}
+			{currentNodes.length > 0 && (
+				<OrgChart nodes={currentNodes} layout='mixed' type='default' />
+			)}
 		</div>
 	);
 };
