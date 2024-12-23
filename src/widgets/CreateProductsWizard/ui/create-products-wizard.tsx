@@ -14,7 +14,7 @@ import {
 	WizardTitle,
 	WizardSteps,
 } from '../../../shared/components/Wizard';
-import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
+import { PreloaderWizard } from '../../../shared/components/Preloader/ui/preloader-wizard';
 
 export const CreateProductsWizard: FC = () => {
 	const { productWizardData, isLoadingProductWizard } = useSelector(
@@ -35,7 +35,7 @@ export const CreateProductsWizard: FC = () => {
 				onChange={goToStep}
 			/>
 			{isLoadingProductWizard ? (
-				<Preloader />
+				<PreloaderWizard text='Идёт генерация данных...' />
 			) : (
 				<>
 					{activeStep === 1 && (

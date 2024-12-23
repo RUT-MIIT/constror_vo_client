@@ -12,6 +12,7 @@ export interface IProgramDetail {
 		name: string;
 	};
 	participants: IParticipant[];
+	annotation: string;
 }
 
 export interface IProgramDetailStore {
@@ -42,6 +43,13 @@ export interface IRemoveParticipantRequest {
 export interface INewParticipant {
 	user_id: number;
 	role_id: number;
+}
+
+export interface IEditAnnotationRequest {
+	programId: number;
+	program: {
+		annotation: string;
+	};
 }
 
 export interface IMessageResponse {
