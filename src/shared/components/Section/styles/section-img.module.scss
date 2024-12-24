@@ -23,13 +23,34 @@
 	flex-direction: column;
 }
 
+.header {
+	margin: 0 0 4px 0;
+	display: flex;
+	align-items: center;
+}
+
 .title {
-	margin: 0;
-	font-size: 28px;
-	line-height: 1.15;
+	margin: 0 8px 0 0;
+	font-size: 24px;
+	line-height: 28px;
 	font-style: normal;
 	font-weight: bold;
 	color: var(--main-black-color);
+}
+
+.icon {
+	margin: 0;
+	width: 20px;
+	height: 20px;
+	background-image: url('../../../images/icons/info.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	transition: all .3s ease-in-out;
+	&:hover {
+		cursor: pointer;
+		opacity: .7;
+	}
 }
 
 .description {

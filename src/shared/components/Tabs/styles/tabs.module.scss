@@ -27,7 +27,7 @@
 
 .tab:hover {
 	cursor: pointer;
-	color: var(--accent-blue-color);
+	color: var(--main-blue-color);
 }
 
 .tab_active {
@@ -35,14 +35,14 @@
 	padding: 4px 0;
 	box-sizing: border-box;
 	border: none;
-	border-bottom: 2px solid var(--accent-blue-color);
+	border-bottom: 2px solid var(--main-blue-color);
 	outline: none;
 	background-color: inherit;
 	font-size: 18px;
 	line-height: 1.15;
 	font-style: normal;
 	font-weight: bold;
-	color: var(--accent-blue-color);
+	color: var(--main-blue-color);
 }
 
 .tab_disabled {

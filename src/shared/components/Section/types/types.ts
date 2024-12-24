@@ -5,6 +5,8 @@ export interface ISectionProps {
 	sectionHeight?: 'page' | 'card';
 	sectionTitle?: ISectionTitle;
 	sectionDescription?: string;
+	withIcon?: boolean;
+	onIconClick?: () => void;
 	children?: ReactNode;
 }
 
@@ -12,6 +14,8 @@ export interface ISectionImgProps {
 	sectionWidth?: 'default' | 'full' | 'large' | 'small';
 	sectionTitle?: ISectionTitle;
 	sectionDescription?: string;
+	withIcon?: boolean;
+	onIconClick?: () => void;
 	children?: ReactNode;
 }
 

@@ -44,6 +44,8 @@
 	border-radius: var(--border-radius);
 	box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
 	z-index: 2000;
+	max-height: 84vh;
+	overflow-y: auto;
 	&_width_small {
 		max-width: 480px;
 	}

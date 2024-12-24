@@ -19,8 +19,10 @@ import {
 import { Select } from '../../../shared/components/Select/ui/select';
 import { UploadField } from '../../../shared/components/UploadField/ui/upload-field';
 import { Button } from '../../../shared/components/Button/ui/button';
+import { Link } from '../../../shared/components/Link/ui/link';
 
 import { validationSchema } from '../lib/helpers';
+import { API_URL } from '../../../shared/config';
 
 import { addProgramToList } from '../../../store/programList/actions';
 import { educationForms } from '../../../store/catalog/mock';
@@ -106,6 +108,10 @@ export const AddProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 
 	return (
 		<Form name='form-add-program' onSubmit={handleSubmit}>
+			<Link
+				text='Инструкция по разработке программы'
+				path={`${API_URL}/help/pdf_1`}
+			/>
 			<FormField title='Направление:'>
 				<Select
 					currentOption={currentDirection}

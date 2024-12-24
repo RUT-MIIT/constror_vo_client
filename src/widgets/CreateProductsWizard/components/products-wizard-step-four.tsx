@@ -63,7 +63,7 @@ export const ProductsWizardStepFour: FC<IProductsWizardStepFourProps> = ({
 		<>
 			<WizardMain>
 				<Form name='create-products-wizard-step-4' onSubmit={handleSubmit}>
-					<FormField title='Нормативно-справочная информация для продуктов:'>
+					<FormField title='Нормативно-справочная информация для продуктов'>
 						<Table marginTop='20'>
 							<div className='table__header'>
 								<div className='table__main-column table__main-column_type_empty'>

@@ -19,6 +19,7 @@ export const initialState: IEducationPlanStore = {
 	isShowModal: {
 		addHours: false,
 		editHours: false,
+		semesterDetail: false,
 	},
 };
 
@@ -29,7 +30,8 @@ export const educationPlanSlice = createSlice({
 		setCurrentDiscipline: (state, action: PayloadAction<IDiscPlan | null>) => {
 			state.currentDiscipline = action.payload;
 		},
-		setCurrentSemesterId: (state, action: PayloadAction<number | null>) => {
+		setCurrentSemesterId: (state, action: PayloadAction<number>) => {
+			console.log(action.payload);
 			state.currentSemesterId = action.payload;
 		},
 		setIsShowModal: (

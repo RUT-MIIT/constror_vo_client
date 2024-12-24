@@ -8,13 +8,34 @@
   flex-direction: column;
 }
 
-.title {
+.header {
 	margin: 0 0 4px 0;
+	display: flex;
+	align-items: center;
+}
+
+.title {
+	margin: 0 8px 0 0;
 	color: var(--main-black-color);
 	font-size: 16px;
 	font-style: normal;
 	font-weight: bold;
 	line-height: 20px;
+}
+
+.icon {
+	margin: 0;
+	width: 20px;
+	height: 20px;
+	background-image: url('../../../../images/icons/info.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	transition: all .3s ease-in-out;
+	&:hover {
+		cursor: pointer;
+		opacity: .7;
+	}
 }
 
 .error {

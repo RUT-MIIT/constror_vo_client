@@ -17,8 +17,10 @@ import {
 } from '../../../shared/components/Form/components';
 import { Select } from '../../../shared/components/Select/ui/select';
 import { Button } from '../../../shared/components/Button/ui/button';
+import { Link } from '../../../shared/components/Link/ui/link';
 
 import { validationSchema } from '../lib/helpers';
+import { API_URL } from '../../../shared/config';
 
 import { editProgramFromList } from '../../../store/programList/actions';
 import { educationForms } from '../../../store/catalog/mock';
@@ -55,8 +57,6 @@ export const EditProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 		{ profile: currentProgram ? currentProgram.profile : '' },
 		validationSchema
 	);
-
-	console.log(currentProgram);
 
 	const handleChangeDirection = (option: IEducationDirection) => {
 		setCurrentDirection(option);
@@ -97,6 +97,10 @@ export const EditProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 
 	return (
 		<Form name='form-edit-program' onSubmit={handleSubmit}>
+			<Link
+				text='Инструкция по разработке программы'
+				path={`${API_URL}/help/pdf_1`}
+			/>
 			<FormField title='Направление:'>
 				<Select
 					currentOption={currentDirection}

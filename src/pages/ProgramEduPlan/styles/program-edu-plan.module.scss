@@ -72,6 +72,14 @@
 	align-items: stretch;
 }
 
+.semester {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
 .count {
 	margin: 0;
 	padding: 4px;
@@ -80,7 +88,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 72px;
+	width: 76px;
 	min-height: 54px;
 	flex-grow: 1;
 	background-color: var(--main-white-color);
@@ -89,8 +97,8 @@
 	&_type_active {
 		background-color: var(--main-blue-color);
 	}
-	&_type_header {
-		min-height: 36px;
+	&_type_small {
+		min-height: 24px;
 	}
 	&:hover {
 		cursor: pointer;
@@ -100,11 +108,14 @@
 		margin: 0;
 		width: 100%;
 		font-style: normal;
-		font-size: 18px;
+		font-size: 16px;
 		font-weight: 300;
 		line-height: 1.15;
 		color: var(--main-white-color);
 		text-align: center;
+		&_font_small {
+			font-size: 12px;
+		}
 	}
 	&__form {
 		margin: 4px 0 0 0;
@@ -155,11 +166,11 @@
 		font-weight: 700;
 		line-height: 1;
 		color: var(--main-white-color);
-		&_color_red {
-			background-color: var(--accent-red-color);
+		&_type_opd {
+			background-color: var(--main-blue-light-color);
 		}
-		&_color_green {
-			background-color: var(--accent-green-color);
+		&_type_pd {
+			background-color: var(--main-blue-dark-color);
 		}
 	}
 	&__main {
@@ -183,6 +194,36 @@
 	}
 }
 
+.total {
+	margin: 0;
+	width: 100%;
+  font-style: normal;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.15;
+	color: var(--main-black-color);
+	text-align: center;
+	&__count {
+		margin: 4px 0 0 0;
+		width: 100%;
+		font-style: normal;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 1.15;
+		color: var(--main-black-color);
+		text-align: center;
+		&_color_red {
+			color: var(--accent-red-color);
+		}
+		&_color_green {
+			color: var(--accent-green-color);
+		}
+		&_color_grey {
+			color: var(--main-grey-color);
+		}
+	}
+}
+
 .text {
 	margin: 0;
 	width: 100%;
@@ -198,6 +239,10 @@
 	}
 	&_fs_medium {
 		font-size: 18px;
+		font-weight: 500;
+	}
+	&_fs_small {
+		font-size: 12px;
 		font-weight: 500;
 	}
 	&_align_center {

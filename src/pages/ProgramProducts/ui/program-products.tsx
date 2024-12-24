@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../../../store/store';
 
 import { EROUTES } from '../../../shared/utils/routes';
@@ -23,6 +23,7 @@ import { Modal } from '../../../shared/components/Modal/ui/modal';
 import { ProgramProductsLevel } from './program-products-level';
 import { ProgramNsiLevel } from './program-nsi-level';
 import { CreateProductsWizard } from '../../../widgets/CreateProductsWizard/ui/create-products-wizard';
+import { ProductsInfoDetail } from './products-info-detail';
 import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 
 import styles from '../styles/program-products.module.scss';
@@ -35,6 +36,9 @@ export const ProgramProducts: FC = () => {
 
 	const { loadingData, errorData } = useSelector((state) => state.product);
 
+	const [isOpenProductsInfoModal, setIsOpenProductsInfoModal] =
+		useState<boolean>();
+
 	const fetchInitialData = async () => {
 		if (program) {
 			await Promise.all([
@@ -45,11 +49,16 @@ export const ProgramProducts: FC = () => {
 		}
 	};
 
+	const openProductsInfoModal = () => {
+		setIsOpenProductsInfoModal(true);
+	};
+
 	const openProductWizard = () => {
 		dispatch(setIsShowProductWizard(true));
 	};
 
 	const handleCloseModal = () => {
+		setIsOpenProductsInfoModal(false);
 		dispatch(setIsShowProductWizard(false));
 	};
 
@@ -75,7 +84,9 @@ export const ProgramProducts: FC = () => {
 				sectionWidth='full'
 				sectionTitle={{ text: 'Исходные данные' }}
 				sectionDescription='При помощи искусственного интеллекта, на основе методологии и описания предметной области создаются продукты программы
-и перечень НСИ, которые можно редактировать, удалять или добавлять.'>
+и перечень НСИ, которые можно редактировать, удалять или добавлять.'
+				withIcon
+				onIconClick={openProductsInfoModal}>
 				<div className={styles.buttons}>
 					<Button
 						text='Создать продукты'
@@ -107,6 +118,15 @@ export const ProgramProducts: FC = () => {
 					onClose={handleCloseModal}
 					modalWidth='wizard'>
 					<CreateProductsWizard />
+				</Modal>
+			)}
+			{isOpenProductsInfoModal && (
+				<Modal
+					title='Описание замысла (идеи) образовательной программы'
+					modalWidth='large'
+					isOpen={isOpenProductsInfoModal}
+					onClose={handleCloseModal}>
+					<ProductsInfoDetail />
 				</Modal>
 			)}
 		</div>
