@@ -7,6 +7,8 @@ export const SectionImg: FC<ISectionImgProps> = ({
 	sectionWidth = 'default',
 	sectionTitle,
 	sectionDescription,
+	withIcon = false,
+	onIconClick,
 	children,
 }) => {
 	return (
@@ -15,7 +17,14 @@ export const SectionImg: FC<ISectionImgProps> = ({
 				styles[`section_width_${sectionWidth}`]
 			}`}>
 			<div className={styles.container}>
-				{sectionTitle && <h2 className={styles.title}>{sectionTitle.text}</h2>}
+				{sectionTitle && (
+					<div className={styles.header}>
+						<h2 className={styles.title}>{sectionTitle.text}</h2>
+						{withIcon && (
+							<div className={styles.icon} onClick={onIconClick}></div>
+						)}
+					</div>
+				)}
 				{sectionDescription && (
 					<p className={styles.description}>{sectionDescription}</p>
 				)}

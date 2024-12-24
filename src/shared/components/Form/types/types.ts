@@ -11,6 +11,8 @@ export interface IFormProps {
 
 export interface IFormFieldProps {
 	title?: string;
+	withInfo?: boolean;
+	onInfo?: () => void;
 	fieldError?: IFormFieldError;
 	children?: ReactNode;
 }

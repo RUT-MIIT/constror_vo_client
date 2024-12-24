@@ -21,12 +21,12 @@ export const ProgramDesign: FC = () => {
 			<SectionImg
 				sectionWidth='full'
 				sectionTitle={{ text: 'Учебный план' }}
-				sectionDescription='Процесс настройки дизайн концепта программы.'>
+				sectionDescription='Процесс настройки дизайн-концепта программы.'>
 				<div className={styles.buttons}>
-					<Button width='auto' text='Создать дизайн концепт' isBlock={true} />
+					<Button width='auto' text='Создать дизайн-концепт' isBlock={true} />
 					{program ? (
 						<Button
-							text='Открыть дизайн концепт'
+							text='Открыть дизайн-концепт'
 							style='light'
 							onClick={() => navigate(`/design/${program.id}/main`)}
 						/>

@@ -33,7 +33,7 @@ th, td {
 thead th {
   position: sticky;
   top: 0;
-  background-color: #041A76;
+  background-color: var(--main-blue-dark-color);
   color: #ffffff;
   z-index: 1;
 }
@@ -42,7 +42,7 @@ thead th {
 	width: 40px;
   position: sticky;
   top: 41px;
-  background-color: #041A76;
+  background-color: var(--main-blue-dark-color);
   color: #ffffff;
   z-index: 1;
 	text-align: center;
@@ -54,7 +54,7 @@ thead th {
 
 .table_text_bold {
 	font-weight: bold;
-	background-color: #435498;
+	background-color: var(--main-blue-color);
 	color: #ffffff;
 }
 
@@ -62,7 +62,7 @@ thead th {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	background-color: #EA0A2A;
+	background-color: var(--accent-green-color);
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 1;

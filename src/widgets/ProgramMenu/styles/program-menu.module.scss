@@ -1,6 +1,6 @@
 .nav {
 	margin: 0;
-	width: 288px;
+	width: 322px;
 	padding: 20px 20px 20px 24px;
 	height: 100vh;
   box-sizing: border-box;
@@ -93,6 +93,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+	flex-shrink: 0;
 }
 
 .icon_type_info {
@@ -159,8 +160,8 @@
   margin: 0 0 0 8px;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 14px;
+  line-height: 14px;
   color: var(--main-black-color);
 	transition: color .3s ease-in-out;
 }

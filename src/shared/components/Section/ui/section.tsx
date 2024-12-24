@@ -8,6 +8,8 @@ export const Section: FC<ISectionProps> = ({
 	sectionHeight = 'page',
 	sectionTitle,
 	sectionDescription,
+	withIcon = false,
+	onIconClick,
 	children,
 }) => {
 	return (
@@ -17,7 +19,14 @@ export const Section: FC<ISectionProps> = ({
 				${styles[`container_width_${sectionWidth}`]}
 				${styles[`container_height_${sectionHeight}`]}
 			`}>
-			{sectionTitle && <h2 className={styles.title}>{sectionTitle.text}</h2>}
+			{sectionTitle && (
+				<div className={styles.header}>
+					<h2 className={styles.title}>{sectionTitle.text}</h2>
+					{withIcon && (
+						<div className={styles.icon} onClick={onIconClick}></div>
+					)}
+				</div>
+			)}
 			{sectionDescription && (
 				<p className={styles.description}>{sectionDescription}</p>
 			)}

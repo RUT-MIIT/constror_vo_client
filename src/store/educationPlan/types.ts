@@ -9,6 +9,7 @@ export interface IEducationPlanStore {
 	isShowModal: {
 		addHours: boolean;
 		editHours: boolean;
+		semesterDetail: boolean;
 	};
 }
 

@@ -17,7 +17,9 @@ import {
 } from '../../../shared/components/Wizard';
 import { MethodologyManager } from '../../MethodologyManager/ui/methodology-manager';
 
+import { Modal } from '../../../shared/components/Modal/ui/modal';
 import { Button } from '../../../shared/components/Button/ui/button';
+import { Text } from '../../../shared/components/Typography';
 
 interface IProductsWizardStepOneProps {
 	goToNextStep: () => void;
@@ -44,6 +46,9 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 	const [description, setDescription] = useState<string>(initialDescription);
 	const [isBlockSubmit, setIsBlockSubmit] = useState<boolean>(true);
 
+	const [isOpenMethodologyInfoModal, setIsOpenMethodologyInfoModal] =
+		useState<boolean>();
+
 	const handleChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setDescription(e.target.value);
 	};
@@ -56,6 +61,14 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 		setMethodology((prev) =>
 			prev.filter((item) => item !== methodologyToRemove)
 		);
+	};
+
+	const openMethodologyInfoModal = () => {
+		setIsOpenMethodologyInfoModal(true);
+	};
+
+	const closeMethodologyInfoModal = () => {
+		setIsOpenMethodologyInfoModal(false);
 	};
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -82,20 +95,23 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 	return (
 		<>
 			<WizardMain>
-				<WizardSubtitle text='Выберите одну или несколько методологий из предложенного списка или добавьте данные своей методологии. После этого опишите предметную область программы для продолжения работы.' />
+				<WizardSubtitle text='Опишите замысел (идею) образовательной программы и определите модель жизненного цикла для реконструкции деятельности её выпускника. Пользуйтесь подсказками.' />
 				<Form name='create-products-wizard-step-1' onSubmit={handleSubmit}>
-					<FormField title='Выбор методологии:'>
-						<MethodologyManager
-							currentValues={methodology}
-							onAdd={handleAddMethodology}
-							onRemove={handleRemoveMethodology}
-						/>
-					</FormField>
-					<FormField title='Описание предметной области:'>
+					<FormField title='Описание замысла (идеи) образовательной программы'>
 						<FormTextarea
 							name='description'
 							value={description}
 							onChange={handleChangeDescription}
+						/>
+					</FormField>
+					<FormField
+						title='Выбор модели жизненного цикла'
+						withInfo
+						onInfo={openMethodologyInfoModal}>
+						<MethodologyManager
+							currentValues={methodology}
+							onAdd={handleAddMethodology}
+							onRemove={handleRemoveMethodology}
 						/>
 					</FormField>
 				</Form>
@@ -109,6 +125,14 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 					isBlock={isBlockSubmit}
 				/>
 			</WizardButtons>
+			{isOpenMethodologyInfoModal && (
+				<Modal
+					title='Модель жизненного цикла'
+					isOpen={isOpenMethodologyInfoModal}
+					onClose={closeMethodologyInfoModal}>
+					<Text text='Продукты, которые создаёт выпускник в профессиональной деятельности (или&nbsp;участвует в их создании) имеют жизненный цикл создания, который можно описать по определённым стандартам (моделям). Нужно определиться по какой модели жизненного цикла будет производиться реконструкция деятельности выпускника образовательной программы. Наиболее распространённые модели есть в&nbsp;нашей базе, их просто можно выбрать из списка. Если для проектирования необходимо использовать другие модели, которые заданы документами о&nbsp;стандартизации (ГОСТ, ГОСТ Р и др.), то Вы можете добавить эти модели самостоятельно, загрузив файлы соответствующих документов в машиночитаемом формате .pdf, .txt.  ' />
+				</Modal>
+			)}
 		</>
 	);
 };

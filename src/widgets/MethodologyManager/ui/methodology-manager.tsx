@@ -48,11 +48,11 @@ export const MethodologyManager: FC<IMethodologyManagerProps> = ({
 		<div className={styles.container}>
 			<div className={styles.control}>
 				<Button
-					text='Создать методологию'
-					onClick={openAddMethodologyModal}></Button>
-				<Button
-					text='Выбрать методологию'
+					text='Выбрать модель'
 					onClick={openSelectMethodologyModal}></Button>
+				<Button
+					text='Создать модель'
+					onClick={openAddMethodologyModal}></Button>
 			</div>
 			<Field>
 				<ul className={styles.list}>
