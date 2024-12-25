@@ -97,10 +97,13 @@ export const EditProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 
 	return (
 		<Form name='form-edit-program' onSubmit={handleSubmit}>
-			<Link
-				text='Инструкция по разработке программы'
-				path={`${API_URL}/help/pdf_1`}
-			/>
+			{/*
+				<Link
+					text='Инструкция по разработке программы'
+					path={`${API_URL}/help/pdf_1`}
+				/>
+			*/}
+
 			<FormField title='Направление:'>
 				<Select
 					currentOption={currentDirection}

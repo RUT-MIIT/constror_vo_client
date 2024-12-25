@@ -21,6 +21,7 @@ import { Button } from '../../../shared/components/Button/ui/button';
 import { Modal } from '../../../shared/components/Modal/ui/modal';
 import { AddHoursForm } from './add-hours-form';
 import { SemesterDetail } from './semester-detail';
+import { EduPlanParameters } from './edu-plan-parameters';
 
 import styles from '../styles/program-edu-plan.module.scss';
 
@@ -54,6 +55,10 @@ export const ProgramEduPlan: FC = () => {
 		dispatch(setIsShowModal({ modal: 'addHours', isShow: true }));
 	};
 
+	const handleShowParameters = () => {
+		dispatch(setIsShowModal({ modal: 'eduPlanParameters', isShow: true }));
+	};
+
 	const handleSemesterDetail = (semesterId: number) => {
 		dispatch(setCurrentSemesterId(semesterId));
 		dispatch(setIsShowModal({ modal: 'semesterDetail', isShow: true }));
@@ -62,6 +67,7 @@ export const ProgramEduPlan: FC = () => {
 	const closeModal = () => {
 		dispatch(setIsShowModal({ modal: 'addHours', isShow: false }));
 		dispatch(setIsShowModal({ modal: 'semesterDetail', isShow: false }));
+		dispatch(setIsShowModal({ modal: 'eduPlanParameters', isShow: false }));
 	};
 
 	const calculateTotalZetPerSemester = (
@@ -80,11 +86,13 @@ export const ProgramEduPlan: FC = () => {
 		// Функция для добавления часов из массива дисциплин
 		const addHoursFromDisciplines = (disciplines: IDiscPlan[]) => {
 			disciplines.forEach((discipline) => {
-				discipline.semesters.forEach((semesterData) => {
-					if (totals.hasOwnProperty(semesterData.semester)) {
-						totals[semesterData.semester] += semesterData.zet || 0;
-					}
-				});
+				if (discipline.type !== 'module') {
+					discipline.semesters.forEach((semesterData) => {
+						if (totals.hasOwnProperty(semesterData.semester)) {
+							totals[semesterData.semester] += semesterData.zet || 0;
+						}
+					});
+				}
 			});
 		};
 
@@ -144,64 +152,84 @@ export const ProgramEduPlan: FC = () => {
 		statusClass: string,
 		statusText: string
 	) =>
-		disciplines.map((discipline) => (
-			<li className={styles.row} key={discipline.id}>
-				<div className={`${styles.column} ${styles.column_width_full}`}>
-					<div className={styles.discipline}>
-						<span className={`${styles.discipline__status} ${statusClass}`}>
-							{statusText}
-						</span>
-						<div className={styles.discipline__main}>
-							<h6 className={styles.discipline__name}>{discipline.name}</h6>
+		disciplines.map((discipline, i) => {
+			if (discipline.type === 'module') {
+				return (
+					<li className={styles.row} key={i}>
+						<div className={`${styles.discipline}`}>
+							<div
+								className={`${styles.discipline__main} ${styles.discipline__main_type_module}`}>
+								<h6 className={styles.discipline__name}>{discipline.name}</h6>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div className={styles.column}>
-					<ul className={styles.semesters}>
-						{semesters &&
-							semesters.map((semester) => {
-								const activeSemester = discipline.semesters.find(
-									(s) => s.semester === semester.id
-								);
-								return (
-									<li
-										className={`${styles.count} ${
-											activeSemester ? styles.count_type_active : ''
-										}`}
-										key={semester.id}
-										onClick={() => handleAddHours(discipline, semester.id)}>
-										{activeSemester ? (
-											<>
-												{activeSemester.zet ? (
+					</li>
+				);
+			} else {
+				return (
+					<li className={styles.row} key={discipline.id}>
+						<div
+							className={`${styles.column} ${styles.column_width_full} ${styles.column_margin_left}`}>
+							<div className={styles.discipline}>
+								<span className={`${styles.discipline__status} ${statusClass}`}>
+									{statusText}
+								</span>
+								<div className={styles.discipline__main}>
+									<h6 className={styles.discipline__name}>{discipline.name}</h6>
+								</div>
+							</div>
+						</div>
+						<div className={styles.column}>
+							<ul className={styles.semesters}>
+								{semesters &&
+									semesters.map((semester) => {
+										const activeSemester = discipline.semesters.find(
+											(s) => s.semester === semester.id
+										);
+										return (
+											<li
+												className={`${styles.count} ${
+													activeSemester ? styles.count_type_active : ''
+												}`}
+												key={semester.id}
+												onClick={() => handleAddHours(discipline, semester.id)}>
+												{activeSemester ? (
 													<>
-														<span className={`${styles.count__hours}`}>
-															{activeSemester.zet}
-															<span
-																className={`${styles.count__hours_font_small}`}>
-																{' '}
-																ЗЕТ
+														{activeSemester.zet ? (
+															<>
+																<span className={`${styles.count__hours}`}>
+																	{activeSemester.zet}
+																	<span
+																		className={`${styles.count__hours_font_small}`}>
+																		{' '}
+																		ЗЕТ
+																	</span>
+																</span>
+																{activeSemester.control && (
+																	<p className={`${styles.count__form}`}>
+																		{extractFromBrackets(
+																			activeSemester.control
+																		)}
+																	</p>
+																)}
+															</>
+														) : (
+															<span className={`${styles.count__hours}`}>
+																?
 															</span>
-														</span>
-														{activeSemester.control && (
-															<p className={`${styles.count__form}`}>
-																{extractFromBrackets(activeSemester.control)}
-															</p>
 														)}
 													</>
 												) : (
-													<span className={`${styles.count__hours}`}>?</span>
+													<></>
 												)}
-											</>
-										) : (
-											<></>
-										)}
-									</li>
-								);
-							})}
-					</ul>
-				</div>
-			</li>
-		));
+											</li>
+										);
+									})}
+							</ul>
+						</div>
+					</li>
+				);
+			}
+		});
 
 	return (
 		<div className={styles.container}>
@@ -211,6 +239,11 @@ export const ProgramEduPlan: FC = () => {
 				sectionDescription='Процесс проектирования проекта учебного плана с использованием искусственного интеллекта, направленный на оптимизацию работы за счёт поэтапного заполнения данных и автоматической генерации решений.'>
 				<div className={styles.buttons}>
 					<Button width='auto' text='Создать учебный план' isBlock={true} />
+					<Button
+						width='auto'
+						text='Параметры учебного плана'
+						onClick={handleShowParameters}
+					/>
 					{program ? (
 						<Button
 							text='Следующий этап'
@@ -304,6 +337,14 @@ export const ProgramEduPlan: FC = () => {
 					isOpen={isShowModal.semesterDetail}
 					onClose={closeModal}>
 					<SemesterDetail />
+				</Modal>
+			)}
+			{isShowModal.eduPlanParameters && (
+				<Modal
+					title='Параметры учебного плана (обязательные ЗЕТ)'
+					isOpen={isShowModal.eduPlanParameters}
+					onClose={closeModal}>
+					<EduPlanParameters />
 				</Modal>
 			)}
 		</div>

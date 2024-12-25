@@ -20,6 +20,7 @@ export const initialState: IEducationPlanStore = {
 		addHours: false,
 		editHours: false,
 		semesterDetail: false,
+		eduPlanParameters: false,
 	},
 };
 
@@ -31,7 +32,6 @@ export const educationPlanSlice = createSlice({
 			state.currentDiscipline = action.payload;
 		},
 		setCurrentSemesterId: (state, action: PayloadAction<number>) => {
-			console.log(action.payload);
 			state.currentSemesterId = action.payload;
 		},
 		setIsShowModal: (
@@ -66,28 +66,36 @@ export const educationPlanSlice = createSlice({
 			.addCase(
 				actions.addHoursToDiscipline.fulfilled,
 				(state, action: PayloadAction<ISemesterDisc>) => {
-					if (state.disciplinesBasic && state.currentDiscipline) {
-						state.disciplinesBasic = state.disciplinesBasic.map((elem) =>
-							state.currentDiscipline?.id === elem.id
-								? {
+					const updateDisciplines = (disciplines: IDiscPlan[] | null) => {
+						if (!disciplines || !state.currentDiscipline) return disciplines;
+
+						return disciplines.map((elem) => {
+							if (elem.id === state.currentDiscipline?.id) {
+								const existingSemesterIndex = elem.semesters.findIndex(
+									(semester) => semester.semester === action.payload.semester
+								);
+
+								if (existingSemesterIndex !== -1) {
+									const updatedSemesters = [...elem.semesters];
+									updatedSemesters[existingSemesterIndex] = action.payload;
+
+									return {
+										...elem,
+										semesters: updatedSemesters,
+									};
+								} else {
+									return {
 										...elem,
 										semesters: [...elem.semesters, action.payload],
-								  }
-								: elem
-						);
-					}
+									};
+								}
+							}
+							return elem;
+						});
+					};
 
-					if (state.disciplinesSpec && state.currentDiscipline) {
-						state.disciplinesSpec = state.disciplinesSpec.map((elem) =>
-							state.currentDiscipline?.id === elem.id
-								? {
-										...elem,
-										semesters: [...elem.semesters, action.payload],
-								  }
-								: elem
-						);
-					}
-
+					state.disciplinesBasic = updateDisciplines(state.disciplinesBasic);
+					state.disciplinesSpec = updateDisciplines(state.disciplinesSpec);
 					state.currentDiscipline = null;
 					state.currentSemesterId = null;
 					state.isShowModal.addHours = false;

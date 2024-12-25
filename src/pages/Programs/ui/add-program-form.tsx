@@ -108,10 +108,13 @@ export const AddProgramForm: FC<IAddProgramFormProps> = ({ directions }) => {
 
 	return (
 		<Form name='form-add-program' onSubmit={handleSubmit}>
-			<Link
-				text='Инструкция по разработке программы'
-				path={`${API_URL}/help/pdf_1`}
-			/>
+			{/*
+				<Link
+					text='Инструкция по разработке программы'
+					path={`${API_URL}/help/pdf_1`}
+				/>
+			*/}
+
 			<FormField title='Направление:'>
 				<Select
 					currentOption={currentDirection}

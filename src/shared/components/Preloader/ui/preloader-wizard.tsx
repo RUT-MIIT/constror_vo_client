@@ -7,9 +7,11 @@ export const PreloaderWizard: FC<IPreloaderWizardProps> = ({
 	text = 'Идёт загрузка...',
 }) => {
 	return (
-		<figure className={styles.preloader}>
-			<div className={styles.circle}></div>
-			<figcaption className={styles.caption}>{text}</figcaption>
-		</figure>
+		<div className={styles.container}>
+			<figure className={styles.preloader}>
+				<div className={styles.circle}></div>
+				<figcaption className={styles.caption}>{text}</figcaption>
+			</figure>
+		</div>
 	);
 };

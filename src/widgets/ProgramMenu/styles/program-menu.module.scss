@@ -25,6 +25,9 @@
 		color: var(--main-black-color);
 		transition: color .3s ease-in-out;
 	}
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .logo {
@@ -210,4 +213,3 @@
 		color: var(--main-black-color);
 	}
 }
-
