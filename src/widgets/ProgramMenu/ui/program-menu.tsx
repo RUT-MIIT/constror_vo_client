@@ -52,17 +52,21 @@ export const ProgramMenu: FC = () => {
 	const navigate = useNavigate();
 	const { program } = useSelector((state) => state.programDetail);
 
-	function handleChangeSection(section: string) {
+	const handleChangeSection = (section: string) => {
 		if (program) {
 			navigate(EROUTES.PROGRAM + '/' + program.id + '/' + section);
 		}
-	}
+	};
+
+	const handleClickLogo = () => {
+		navigate(EROUTES.PROGRAMS);
+	};
 
 	return (
 		<nav className={styles.nav}>
-			<div className={styles.header}>
+			<div className={styles.header} onClick={handleClickLogo}>
 				<div className={styles.logo}></div>
-				<span className={styles.header__caption}>Конструтор ВО</span>
+				<span className={styles.header__caption}>Конструктор ВО</span>
 			</div>
 			<ul className={styles.menu}>
 				{links.map((elem) => (

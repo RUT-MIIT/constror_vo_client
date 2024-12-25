@@ -10,6 +10,7 @@ export interface IEducationPlanStore {
 		addHours: boolean;
 		editHours: boolean;
 		semesterDetail: boolean;
+		eduPlanParameters: boolean;
 	};
 }
 
@@ -17,6 +18,7 @@ export interface IDiscPlan {
 	id: number;
 	name: string;
 	semesters: ISemesterDisc[];
+	type: string;
 }
 
 export interface IInitialDataResponse {

@@ -31,14 +31,16 @@ export const SemesterDetail: FC = () => {
 				const allDisciplines = [...disciplinesBasic, ...disciplinesSpec];
 
 				allDisciplines.forEach((discipline) => {
-					discipline.semesters.forEach((semesterData) => {
-						if (semesterData.semester === currentSemesterId) {
-							relatedDisciplines.push({
-								name: discipline.name,
-								zet: semesterData.zet || 0, // количество ЗЕТ
-							});
-						}
-					});
+					if (discipline.type !== 'module') {
+						discipline.semesters.forEach((semesterData) => {
+							if (semesterData.semester === currentSemesterId) {
+								relatedDisciplines.push({
+									name: discipline.name,
+									zet: semesterData.zet || 0, // количество ЗЕТ
+								});
+							}
+						});
+					}
 				});
 
 				// Добавляем дисциплины в определенные семестры

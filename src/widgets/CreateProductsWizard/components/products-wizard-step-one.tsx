@@ -10,12 +10,9 @@ import {
 	FormField,
 	FormTextarea,
 } from '../../../shared/components/Form/components';
-import {
-	WizardSubtitle,
-	WizardMain,
-	WizardButtons,
-} from '../../../shared/components/Wizard';
+import { WizardMain, WizardButtons } from '../../../shared/components/Wizard';
 import { MethodologyManager } from '../../MethodologyManager/ui/methodology-manager';
+import { ProductsInfoDetail } from '../../../pages/ProgramProducts/ui/products-info-detail';
 
 import { Modal } from '../../../shared/components/Modal/ui/modal';
 import { Button } from '../../../shared/components/Button/ui/button';
@@ -49,6 +46,9 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 	const [isOpenMethodologyInfoModal, setIsOpenMethodologyInfoModal] =
 		useState<boolean>();
 
+	const [isOpenProductsInfoModal, setIsOpenProductsInfoModal] =
+		useState<boolean>();
+
 	const handleChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setDescription(e.target.value);
 	};
@@ -67,7 +67,12 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 		setIsOpenMethodologyInfoModal(true);
 	};
 
-	const closeMethodologyInfoModal = () => {
+	const openProductsInfoModal = () => {
+		setIsOpenProductsInfoModal(true);
+	};
+
+	const closeModal = () => {
+		setIsOpenProductsInfoModal(false);
 		setIsOpenMethodologyInfoModal(false);
 	};
 
@@ -95,9 +100,11 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 	return (
 		<>
 			<WizardMain>
-				<WizardSubtitle text='Опишите замысел (идею) образовательной программы и определите модель жизненного цикла для реконструкции деятельности её выпускника. Пользуйтесь подсказками.' />
 				<Form name='create-products-wizard-step-1' onSubmit={handleSubmit}>
-					<FormField title='Описание замысла (идеи) образовательной программы'>
+					<FormField
+						title='Описание замысла (идеи) образовательной программы'
+						withInfo
+						onInfo={openProductsInfoModal}>
 						<FormTextarea
 							name='description'
 							value={description}
@@ -129,8 +136,17 @@ export const ProductsWizardStepOne: FC<IProductsWizardStepOneProps> = ({
 				<Modal
 					title='Модель жизненного цикла'
 					isOpen={isOpenMethodologyInfoModal}
-					onClose={closeMethodologyInfoModal}>
+					onClose={closeModal}>
 					<Text text='Продукты, которые создаёт выпускник в профессиональной деятельности (или&nbsp;участвует в их создании) имеют жизненный цикл создания, который можно описать по определённым стандартам (моделям). Нужно определиться по какой модели жизненного цикла будет производиться реконструкция деятельности выпускника образовательной программы. Наиболее распространённые модели есть в&nbsp;нашей базе, их просто можно выбрать из списка. Если для проектирования необходимо использовать другие модели, которые заданы документами о&nbsp;стандартизации (ГОСТ, ГОСТ Р и др.), то Вы можете добавить эти модели самостоятельно, загрузив файлы соответствующих документов в машиночитаемом формате .pdf, .txt.  ' />
+				</Modal>
+			)}
+			{isOpenProductsInfoModal && (
+				<Modal
+					title='Описание замысла (идеи) образовательной программы'
+					modalWidth='large'
+					isOpen={isOpenProductsInfoModal}
+					onClose={closeModal}>
+					<ProductsInfoDetail />
 				</Modal>
 			)}
 		</>
