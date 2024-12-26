@@ -18,3 +18,8 @@ export const removeHoursFromDiscipline = createAsyncThunk<
 	type.IRemoveHoursResponse,
 	type.IRemoveHoursRequest
 >('eduPlan/removeHours', api.removeHours);
+
+export const setHoursToSemester = createAsyncThunk<
+	type.ISemesterPlan,
+	type.ISetHoursRequest
+>('eduPlan/setHours', api.setHours);

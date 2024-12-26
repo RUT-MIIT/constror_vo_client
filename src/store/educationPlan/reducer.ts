@@ -2,6 +2,7 @@ import type {
 	IEducationPlanStore,
 	IInitialDataResponse,
 	ISemesterDisc,
+	ISemesterPlan,
 	IDiscPlan,
 } from './types';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
@@ -18,9 +19,7 @@ export const initialState: IEducationPlanStore = {
 	errorData: null,
 	isShowModal: {
 		addHours: false,
-		editHours: false,
 		semesterDetail: false,
-		eduPlanParameters: false,
 	},
 };
 
@@ -131,7 +130,20 @@ export const educationPlanSlice = createSlice({
 				state.currentDiscipline = null;
 				state.currentSemesterId = null;
 				state.isShowModal.addHours = false;
-			});
+			})
+			.addCase(
+				actions.setHoursToSemester.fulfilled,
+				(state, action: PayloadAction<ISemesterPlan>) => {
+					if (state.semesters) {
+						state.semesters = state.semesters.map((elem) =>
+							elem.id === action.payload.id ? action.payload : elem
+						);
+					}
+
+					state.currentSemesterId = null;
+					state.isShowModal.semesterDetail = false;
+				}
+			);
 	},
 });
 
