@@ -1,11 +1,27 @@
-import { useState, useEffect, FC } from 'react';
-import { useSelector } from '../../../store/store';
+import type { FC, FormEvent } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from '../../../store/store';
+
+import { setHoursToSemester } from '../../../store/educationPlan/actions';
+
+import { Form } from '../../../shared/components/Form/ui/form';
+import {
+	FormField,
+	FormInputNumber,
+	FormButtons,
+} from '../../../shared/components/Form/components';
+import { Button } from '../../../shared/components/Button/ui/button';
 
 import styles from '../styles/semester-detail.module.scss';
 
-export const SemesterDetail: FC = () => {
+export const SemesterDetailForm: FC = () => {
+	const dispatch = useDispatch();
+
+	const { program } = useSelector((state) => state.programDetail);
 	const { semesters, currentSemesterId, disciplinesBasic, disciplinesSpec } =
 		useSelector((state) => state.eduPlan);
+
+	const [hours, setHours] = useState<number | null>(0);
 
 	const [semesterDetail, setSemesterDetail] = useState<{
 		semesterName: string;
@@ -14,6 +30,30 @@ export const SemesterDetail: FC = () => {
 		semesterName: '',
 		disciplines: [],
 	});
+
+	const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = Number(e.target.value);
+
+		setHours(value);
+	};
+
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (program && currentSemesterId) {
+			console.log(currentSemesterId);
+			const data = {
+				zet_taken: hours || 0,
+			};
+			dispatch(
+				setHoursToSemester({
+					programId: program.id,
+					semesterId: currentSemesterId,
+					semester: data,
+				})
+			);
+		}
+	};
 
 	useEffect(() => {
 		if (semesters && disciplinesBasic && disciplinesSpec) {
@@ -36,32 +76,15 @@ export const SemesterDetail: FC = () => {
 							if (semesterData.semester === currentSemesterId) {
 								relatedDisciplines.push({
 									name: discipline.name,
-									zet: semesterData.zet || 0, // количество ЗЕТ
+									zet: semesterData.zet || 0,
 								});
 							}
 						});
 					}
 				});
 
-				// Добавляем дисциплины в определенные семестры
-				const semesterUpdates = [
-					{ index: 0, name: 'Дисциплины АБП', zet: 17 },
-					{ index: 1, name: 'Дисциплины АБП', zet: 11 },
-					{ index: 3, name: 'Учебная практика', zet: 3 },
-					{ index: 5, name: 'Производственная практика', zet: 6 },
-					{ index: 7, name: 'Преддипломная практика', zet: 12 },
-					{ index: 7, name: 'ВКР', zet: 21 },
-				];
+				setHours(currentSemester.zet_taken);
 
-				// Обновляем массив дисциплин, добавляя их в нужные семестры
-				semesterUpdates.forEach(({ index, name, zet }) => {
-					const semesterId = semesters[index]?.id;
-					if (semesterId === currentSemesterId) {
-						relatedDisciplines.push({ name, zet });
-					}
-				});
-
-				// Обновим состояние с деталями семестра
 				setSemesterDetail({
 					semesterName: currentSemester.name,
 					disciplines: relatedDisciplines,
@@ -85,6 +108,19 @@ export const SemesterDetail: FC = () => {
 					<p className={styles.empty}>Семестр пуст.</p>
 				)}
 			</ul>
+			<Form name='form-semester-detail' onSubmit={handleSubmit}>
+				<FormField title='Занято ЗЕТ на другие мероприятия:'>
+					<FormInputNumber
+						name='hours'
+						value={hours}
+						onChange={handleChangeHours}
+						placeholder='Введите число ЗЕТ'
+					/>
+				</FormField>
+				<FormButtons>
+					<Button type='submit' text='Сохранить' width='full' />
+				</FormButtons>
+			</Form>
 		</div>
 	);
 };

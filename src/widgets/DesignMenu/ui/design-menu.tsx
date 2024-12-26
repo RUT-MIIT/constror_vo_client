@@ -1,6 +1,7 @@
 import type { FC } from 'react';
-import { NavLink, useParams } from 'react-router-dom'; // Импортируем useParams для получения параметров URL.
+import { NavLink, useParams } from 'react-router-dom';
 import { links } from '../mock/links';
+
 import styles from '../styles/design-menu.module.scss';
 
 export const DesignMenu: FC = () => {

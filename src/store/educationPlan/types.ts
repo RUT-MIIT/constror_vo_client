@@ -8,9 +8,7 @@ export interface IEducationPlanStore {
 	errorData: string | null;
 	isShowModal: {
 		addHours: boolean;
-		editHours: boolean;
 		semesterDetail: boolean;
-		eduPlanParameters: boolean;
 	};
 }
 
@@ -31,6 +29,8 @@ export interface IInitialDataResponse {
 export interface ISemesterPlan {
 	id: number;
 	name: string;
+	total_zet: number;
+	zet_taken: number;
 }
 
 export interface ISemesterDisc {
@@ -47,6 +47,12 @@ export interface IAddHoursRequest {
 export interface IRemoveHoursRequest {
 	disciplineId: number;
 	semester: number;
+}
+
+export interface ISetHoursRequest {
+	programId: number;
+	semesterId: number;
+	semester: { zet_taken: number };
 }
 
 export interface IRemoveHoursResponse {

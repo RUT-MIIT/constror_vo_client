@@ -39,3 +39,19 @@ export const removeHours = ({
 		body: JSON.stringify({ semester: semester }),
 	});
 };
+
+export const setHours = ({
+	programId,
+	semesterId,
+	semester,
+}: type.ISetHoursRequest) => {
+	return request(`/programs/${programId}/semesters/${semesterId}/`, {
+		method: 'PATCH',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('accessToken') || ''}`,
+		},
+		body: JSON.stringify({ semester: semester }),
+	});
+};

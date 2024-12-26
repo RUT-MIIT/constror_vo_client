@@ -1,5 +1,8 @@
 import type { FC } from 'react';
-import type { IDiscPlan } from '../../../store/educationPlan/types';
+import type {
+	ISemesterPlan,
+	IDiscPlan,
+} from '../../../store/educationPlan/types';
 
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
@@ -20,8 +23,7 @@ import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 import { Button } from '../../../shared/components/Button/ui/button';
 import { Modal } from '../../../shared/components/Modal/ui/modal';
 import { AddHoursForm } from './add-hours-form';
-import { SemesterDetail } from './semester-detail';
-import { EduPlanParameters } from './edu-plan-parameters';
+import { SemesterDetailForm } from './semester-detail-form';
 
 import styles from '../styles/program-edu-plan.module.scss';
 
@@ -55,10 +57,6 @@ export const ProgramEduPlan: FC = () => {
 		dispatch(setIsShowModal({ modal: 'addHours', isShow: true }));
 	};
 
-	const handleShowParameters = () => {
-		dispatch(setIsShowModal({ modal: 'eduPlanParameters', isShow: true }));
-	};
-
 	const handleSemesterDetail = (semesterId: number) => {
 		dispatch(setCurrentSemesterId(semesterId));
 		dispatch(setIsShowModal({ modal: 'semesterDetail', isShow: true }));
@@ -67,20 +65,19 @@ export const ProgramEduPlan: FC = () => {
 	const closeModal = () => {
 		dispatch(setIsShowModal({ modal: 'addHours', isShow: false }));
 		dispatch(setIsShowModal({ modal: 'semesterDetail', isShow: false }));
-		dispatch(setIsShowModal({ modal: 'eduPlanParameters', isShow: false }));
 	};
 
 	const calculateTotalZetPerSemester = (
 		disciplinesBasic: IDiscPlan[],
 		disciplinesSpec: IDiscPlan[],
-		semesters: { id: number; existingZet?: number }[]
+		semesters: ISemesterPlan[]
 	): Record<number, number> => {
 		// Инициализация объекта для хранения суммы часов
 		const totals: Record<number, number> = {};
 
 		// Устанавливаем начальные значения из существующих данных
 		semesters.forEach((semester) => {
-			totals[semester.id] = semester.existingZet || 0;
+			totals[semester.id] = semester.zet_taken || 0;
 		});
 
 		// Функция для добавления часов из массива дисциплин
@@ -100,24 +97,40 @@ export const ProgramEduPlan: FC = () => {
 		addHoursFromDisciplines(disciplinesBasic);
 		addHoursFromDisciplines(disciplinesSpec);
 
-		if (semesters.length > 0) {
-			const semesterUpdates = [
-				{ index: 0, value: 17 },
-				{ index: 1, value: 11 },
-				{ index: 3, value: 3 },
-				{ index: 5, value: 6 },
-				{ index: 7, value: 33 },
-			];
-
-			semesterUpdates.forEach(({ index, value }) => {
-				const semesterId = semesters[index]?.id;
-				if (semesterId && totals.hasOwnProperty(semesterId)) {
-					totals[semesterId] += value;
-				}
-			});
-		}
-
 		return totals;
+	};
+
+	const getYearlyValidationClass = (
+		semesterId: number,
+		totalZetPerSemester: Record<number, number>,
+		semesters: ISemesterPlan[]
+	): string => {
+		// Найти индекс текущего семестра
+		const currentSemesterIndex = semesters.findIndex(
+			(s) => s.id === semesterId
+		);
+
+		// Определить год (пара семестров: 1+2, 3+4 и т.д.)
+		const isOddSemester = currentSemesterIndex % 2 === 0; // Проверяем, четный ли семестр
+		const pairedIndex = isOddSemester
+			? currentSemesterIndex + 1
+			: currentSemesterIndex - 1;
+
+		// Получить сумму ЗЕТ для пары семестров
+		const totalZetForYear =
+			(totalZetPerSemester[semesters[currentSemesterIndex]?.id] || 0) +
+			(totalZetPerSemester[semesters[pairedIndex]?.id] || 0);
+
+		const countHours = program?.form === 'Очная' ? 60 : 70;
+
+		// Возвращаем соответствующий класс для подсветки
+		if (totalZetForYear === 0) {
+			return styles.total__count_color_green;
+		} else if (totalZetForYear > countHours) {
+			return styles.total__count_color_red;
+		} else {
+			return styles.total__count_color_green;
+		}
 	};
 
 	const totalZetPerSemester = calculateTotalZetPerSemester(
@@ -125,6 +138,12 @@ export const ProgramEduPlan: FC = () => {
 		disciplinesSpec || [],
 		semesters || []
 	);
+
+	const countDisciplines = (...disciplineGroups: IDiscPlan[][]): number => {
+		return disciplineGroups
+			.flat()
+			.filter((discipline) => discipline.type !== 'module').length;
+	};
 
 	useEffect(() => {
 		fetchInitialData();
@@ -239,11 +258,6 @@ export const ProgramEduPlan: FC = () => {
 				sectionDescription='Процесс проектирования проекта учебного плана с использованием искусственного интеллекта, направленный на оптимизацию работы за счёт поэтапного заполнения данных и автоматической генерации решений.'>
 				<div className={styles.buttons}>
 					<Button width='auto' text='Создать учебный план' isBlock={true} />
-					<Button
-						width='auto'
-						text='Параметры учебного плана'
-						onClick={handleShowParameters}
-					/>
 					{program ? (
 						<Button
 							text='Следующий этап'
@@ -271,7 +285,12 @@ export const ProgramEduPlan: FC = () => {
 								<div className={styles.card}>
 									<p
 										className={`${styles.text} ${styles.text_fs_large} ${styles.text_align_center}`}>
-										Перечень дисциплин
+										Перечень дисциплин (
+										{countDisciplines(
+											disciplinesSpec || [],
+											disciplinesBasic || []
+										)}
+										)
 									</p>
 								</div>
 							</div>
@@ -291,13 +310,13 @@ export const ProgramEduPlan: FC = () => {
 												onClick={() => handleSemesterDetail(semester.id)}>
 												<p className={`${styles.total}`}>Сумма</p>
 												<p
-													className={`${styles.total__count} ${
-														totalZetPerSemester[semester.id] === 0
-															? styles.total__count_color_grey
-															: totalZetPerSemester[semester.id] > 36
-															? styles.total__count_color_red
-															: styles.total__count_color_green
-													}`}>
+													className={`${
+														styles.total__count
+													} ${getYearlyValidationClass(
+														semester.id,
+														totalZetPerSemester,
+														semesters
+													)}`}>
 													{totalZetPerSemester[semester.id] || 0} ЗЕТ
 												</p>
 											</div>
@@ -336,15 +355,7 @@ export const ProgramEduPlan: FC = () => {
 					title='Наполнение семестра'
 					isOpen={isShowModal.semesterDetail}
 					onClose={closeModal}>
-					<SemesterDetail />
-				</Modal>
-			)}
-			{isShowModal.eduPlanParameters && (
-				<Modal
-					title='Параметры учебного плана (обязательные ЗЕТ)'
-					isOpen={isShowModal.eduPlanParameters}
-					onClose={closeModal}>
-					<EduPlanParameters />
+					<SemesterDetailForm />
 				</Modal>
 			)}
 		</div>

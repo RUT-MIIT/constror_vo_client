@@ -64,12 +64,12 @@ export const AddHoursForm: FC = () => {
 	const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = Number(e.target.value);
 
-		if (value === 0 || (value > 1 && value <= 36)) {
+		if (value === 0 || value > 1) {
 			setHoursError({ text: '', isShow: false });
 			setIsBlockSubmitButton(false);
 		} else {
 			setHoursError({
-				text: 'Число должно быть равно 0 или в диапазоне от 2 до 36',
+				text: 'Число должно быть больше 2 ЗЕТ',
 				isShow: true,
 			});
 			setIsBlockSubmitButton(true);
