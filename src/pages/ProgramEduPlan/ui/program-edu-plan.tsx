@@ -76,8 +76,9 @@ export const ProgramEduPlan: FC = () => {
 		const totals: Record<number, number> = {};
 
 		// Устанавливаем начальные значения из существующих данных
+
 		semesters.forEach((semester) => {
-			totals[semester.id] = semester.zet_taken || 0;
+			totals[semester.id] = 0;
 		});
 
 		// Функция для добавления часов из массива дисциплин
@@ -103,33 +104,52 @@ export const ProgramEduPlan: FC = () => {
 	const getYearlyValidationClass = (
 		semesterId: number,
 		totalZetPerSemester: Record<number, number>,
-		semesters: ISemesterPlan[]
+		semesters: ISemesterPlan[],
+		disciplinesBasic: IDiscPlan[],
+		disciplinesSpec: IDiscPlan[]
 	): string => {
-		// Найти индекс текущего семестра
-		const currentSemesterIndex = semesters.findIndex(
-			(s) => s.id === semesterId
-		);
+		const currentSemester = semesters.find((s) => s.id === semesterId);
 
-		// Определить год (пара семестров: 1+2, 3+4 и т.д.)
-		const isOddSemester = currentSemesterIndex % 2 === 0; // Проверяем, четный ли семестр
-		const pairedIndex = isOddSemester
-			? currentSemesterIndex + 1
-			: currentSemesterIndex - 1;
+		if (!currentSemester) {
+			return styles.total__count_color_grey;
+		}
 
-		// Получить сумму ЗЕТ для пары семестров
-		const totalZetForYear =
-			(totalZetPerSemester[semesters[currentSemesterIndex]?.id] || 0) +
-			(totalZetPerSemester[semesters[pairedIndex]?.id] || 0);
+		if (currentSemester.plan_zet === null || currentSemester.plan_zet === 0) {
+			return styles.total__count_color_grey;
+		}
 
-		const countHours = program?.form === 'Очная' ? 60 : 70;
+		if (currentSemester.plan_disc === null || currentSemester.plan_disc === 0) {
+			return styles.total__count_color_grey;
+		}
 
-		// Возвращаем соответствующий класс для подсветки
-		if (totalZetForYear === 0) {
-			return styles.total__count_color_green;
-		} else if (totalZetForYear > countHours) {
+		// Получить фактическое количество ЗЕТ для семестра
+		const totalZetForSemester = totalZetPerSemester[currentSemester.id] || 0;
+
+		// Фильтруем дисциплины, относящиеся к текущему семестру, и не являющиеся модулями
+		const totalDisciplinesForSemester = [
+			...disciplinesBasic,
+			...disciplinesSpec,
+		].filter(
+			(discipline) =>
+				discipline.type !== 'module' &&
+				discipline.semesters.some((s) => s.semester === semesterId)
+		).length;
+
+		// Проверка: количество дисциплин превышает плановое значение
+		if (
+			currentSemester.plan_disc &&
+			totalDisciplinesForSemester > currentSemester.plan_disc
+		) {
+			// Если количество дисциплин больше планового, возвращаем красный цвет
 			return styles.total__count_color_red;
-		} else {
+		}
+
+		// Сравниваем фактическое количество ЗЕТ с плановым (plan_zet)
+		if (totalZetForSemester === currentSemester.plan_zet) {
 			return styles.total__count_color_green;
+		} else {
+			// Если всё в пределах нормы, возвращаем зелёный цвет
+			return styles.total__count_color_red;
 		}
 	};
 
@@ -315,7 +335,9 @@ export const ProgramEduPlan: FC = () => {
 													} ${getYearlyValidationClass(
 														semester.id,
 														totalZetPerSemester,
-														semesters
+														semesters,
+														disciplinesBasic || [],
+														disciplinesSpec || []
 													)}`}>
 													{totalZetPerSemester[semester.id] || 0} ЗЕТ
 												</p>

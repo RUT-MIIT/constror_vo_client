@@ -71,8 +71,9 @@ export const ProgramDisciplineLevel: FC = () => {
 		<Level
 			isShow={isShowLevel.discipline}
 			onShow={showLevel}
-			title='Профессиональные дисциплины'
-			count={disciplines ? disciplines.length : 0}
+			title={`Профессиональные дисциплины ${
+				disciplines ? disciplines.length : 0
+			} / 30`}
 			icons={[{ icon: 'close', onClick: hideLevel }]}>
 			{disciplines && disciplines.length > 0 ? (
 				<LevelList>
