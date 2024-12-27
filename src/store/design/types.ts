@@ -66,7 +66,7 @@ export interface IEducationPlan {
 	competences: [
 		{
 			id: string;
-			shortName: string;
+			code: string;
 			name: string;
 		}
 	];

@@ -18,6 +18,7 @@ export const DesignPlan: FC = () => {
 								№ <br></br> п/п
 							</th>
 							<th rowSpan={2}>Наименование модуля и дисциплины</th>
+							<th rowSpan={2}>Шифр&nbsp;компетенции</th>
 							<th className={styles.headerAlign} colSpan={8}>
 								Семестры
 							</th>
@@ -49,8 +50,28 @@ export const DesignPlan: FC = () => {
 									colSpan={elem.colspan || 1}>
 									{elem.name}
 								</td>
+
 								{elem.colspan === null && (
 									<>
+										<td
+											title={
+												elem.competences
+													? elem.competences
+															.map(
+																(competence) =>
+																	`${competence.code}: ${competence.name}`
+															)
+															.join(', ')
+													: ''
+											}>
+											{elem.competences &&
+												elem.competences.map((competence, index) => (
+													<span key={index}>
+														{competence.code}
+														{index < elem.competences.length - 1 && ', '}
+													</span>
+												))}
+										</td>
 										<td className={elem.sem1 ? styles.table_star : ''}></td>
 										<td className={elem.sem2 ? styles.table_star : ''}></td>
 										<td className={elem.sem3 ? styles.table_star : ''}></td>
