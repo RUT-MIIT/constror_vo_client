@@ -15,6 +15,7 @@ import {
 	FormLinks,
 } from '../../../shared/components/Form/components';
 import { Button } from '../../../shared/components/Button/ui/button';
+import { Link } from '../../../shared/components/Link/ui/link';
 
 import { links, validationSchema, shouldBlockSubmit } from '../lib/helpers';
 
@@ -76,6 +77,10 @@ export const Login: FC = () => {
 								onChange={handleChange}
 							/>
 						</FormField>
+						<Link
+							text='Проектирование от компетентносного профиля'
+							path='https://constructor-vo.emiit.ru/'
+						/>
 						<FormButtons>
 							<Button
 								text='Забыли пароль?'

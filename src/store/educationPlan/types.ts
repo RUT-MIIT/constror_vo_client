@@ -29,8 +29,9 @@ export interface IInitialDataResponse {
 export interface ISemesterPlan {
 	id: number;
 	name: string;
+	plan_disc: number;
+	plan_zet: number;
 	total_zet: number;
-	zet_taken: number;
 }
 
 export interface ISemesterDisc {
@@ -52,7 +53,7 @@ export interface IRemoveHoursRequest {
 export interface ISetHoursRequest {
 	programId: number;
 	semesterId: number;
-	semester: { zet_taken: number };
+	semester: { plan_disc: number; plan_zet: number };
 }
 
 export interface IRemoveHoursResponse {

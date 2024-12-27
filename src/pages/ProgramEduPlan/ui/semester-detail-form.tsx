@@ -22,6 +22,7 @@ export const SemesterDetailForm: FC = () => {
 		useSelector((state) => state.eduPlan);
 
 	const [hours, setHours] = useState<number | null>(0);
+	const [disciplineCount, setDisciplineCount] = useState<number | null>(0);
 
 	const [semesterDetail, setSemesterDetail] = useState<{
 		semesterName: string;
@@ -33,17 +34,23 @@ export const SemesterDetailForm: FC = () => {
 
 	const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = Number(e.target.value);
-
 		setHours(value);
+	};
+
+	const handleChangeDisciplineCount = (
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
+		const value = Number(e.target.value);
+		setDisciplineCount(value);
 	};
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		if (program && currentSemesterId) {
-			console.log(currentSemesterId);
 			const data = {
-				zet_taken: hours || 0,
+				plan_disc: disciplineCount || 0,
+				plan_zet: hours || 0,
 			};
 			dispatch(
 				setHoursToSemester({
@@ -83,7 +90,8 @@ export const SemesterDetailForm: FC = () => {
 					}
 				});
 
-				setHours(currentSemester.zet_taken);
+				setHours(currentSemester.plan_zet);
+				setDisciplineCount(currentSemester.plan_disc);
 
 				setSemesterDetail({
 					semesterName: currentSemester.name,
@@ -109,12 +117,20 @@ export const SemesterDetailForm: FC = () => {
 				)}
 			</ul>
 			<Form name='form-semester-detail' onSubmit={handleSubmit}>
-				<FormField title='Занято ЗЕТ на другие мероприятия:'>
+				<FormField title='Запланировано количество ЗЕТ:'>
 					<FormInputNumber
 						name='hours'
 						value={hours}
 						onChange={handleChangeHours}
 						placeholder='Введите число ЗЕТ'
+					/>
+				</FormField>
+				<FormField title='Запланировано количество дисциплин (не более):'>
+					<FormInputNumber
+						name='hours'
+						value={disciplineCount}
+						onChange={handleChangeDisciplineCount}
+						placeholder='Введите число дисциплин'
 					/>
 				</FormField>
 				<FormButtons>
