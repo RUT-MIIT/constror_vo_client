@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../store/store';
 
 import { EROUTES } from '../../../shared/utils/routes';
@@ -18,6 +18,7 @@ import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 import { ProgramCompetenceLevel } from './program-competence-level';
 import { ProgramDisciplineLevel } from './program-discipline-level';
 import { Button } from '../../../shared/components/Button/ui/button';
+import { Modal } from '../../../shared/components/Modal/ui/modal';
 
 import styles from '../styles/program-disc-basic.module.scss';
 
@@ -32,6 +33,16 @@ export const ProgramDiscBasic: FC = () => {
 		if (program) {
 			await Promise.all([dispatch(getInitialData(program.id))]);
 		}
+	};
+
+	const [isOpenInfoModal, setIsOpenInfoModal] = useState<boolean>();
+
+	const openInfoModal = () => {
+		setIsOpenInfoModal(true);
+	};
+
+	const closeInfoModal = () => {
+		setIsOpenInfoModal(false);
 	};
 
 	useEffect(() => {
@@ -56,7 +67,9 @@ export const ProgramDiscBasic: FC = () => {
 			<SectionImg
 				sectionWidth='full'
 				sectionTitle={{ text: 'Общепрофессиональные дисциплины' }}
-				sectionDescription='Процесс последовательного проектирования общепрофессиональных дисицплин с использованием искусственного интеллекта, направленный на оптимизацию работы за счёт поэтапного заполнения данных и автоматической генерации решений.'>
+				sectionDescription='Процесс последовательного проектирования общепрофессиональных дисицплин с использованием искусственного интеллекта, направленный на оптимизацию работы за счёт поэтапного заполнения данных и автоматической генерации решений.'
+				withIcon
+				onIconClick={openInfoModal}>
 				<div className={styles.buttons}>
 					<Button
 						width='auto'
@@ -86,6 +99,15 @@ export const ProgramDiscBasic: FC = () => {
 					<ProgramDisciplineLevel />
 				</div>
 			</Section>
+			{isOpenInfoModal && (
+				<Modal
+					title='Общепрофессиональные дисциплины'
+					description='Общепрофессиональные дисциплины должны включать..'
+					modalWidth='large'
+					isOpen={isOpenInfoModal}
+					onClose={closeInfoModal}
+				/>
+			)}
 		</div>
 	);
 };

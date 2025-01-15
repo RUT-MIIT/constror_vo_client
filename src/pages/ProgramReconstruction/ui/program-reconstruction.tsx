@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../store/store';
 
 import { EROUTES } from '../../../shared/utils/routes';
@@ -21,6 +21,7 @@ import { ProgramStagesLevel } from './program-stages-level';
 import { ProgramProcessesLevel } from './program-processes-level';
 import { Preloader } from '../../../shared/components/Preloader/ui/preloader';
 import { Button } from '../../../shared/components/Button/ui/button';
+import { Modal } from '../../../shared/components/Modal/ui/modal';
 
 import styles from '../styles/program-reconstruction.module.scss';
 
@@ -32,6 +33,16 @@ export const ProgramReconstruction: FC = () => {
 	const { loadingData, errorData } = useSelector(
 		(state) => state.reconstruction
 	);
+
+	const [isOpenInfoModal, setIsOpenInfoModal] = useState<boolean>();
+
+	const openInfoModal = () => {
+		setIsOpenInfoModal(true);
+	};
+
+	const closeInfoModal = () => {
+		setIsOpenInfoModal(false);
+	};
 
 	const fetchInitialData = async () => {
 		if (program) {
@@ -63,7 +74,9 @@ export const ProgramReconstruction: FC = () => {
 			<SectionImg
 				sectionWidth='full'
 				sectionTitle={{ text: 'Реконструкция деятельности' }}
-				sectionDescription='Реконструкция деятельности профессиональной деятельности выпускника ОП – это процесс декомпозиции жизненного цикла продуктов на этапы, процессы и результаты деятельности по каждому процессу, проводимая по стандартам, установленным для соответствующей области профессиональной деятельности (при наличии).'>
+				sectionDescription='Реконструкция деятельности профессиональной деятельности выпускника ОП – это процесс декомпозиции жизненного цикла продуктов на этапы, процессы и результаты деятельности по каждому процессу, проводимая по стандартам, установленным для соответствующей области профессиональной деятельности (при наличии).'
+				withIcon
+				onIconClick={openInfoModal}>
 				<div className={styles.buttons}>
 					<Button width='auto' text='Создать этапы и процессы' isBlock={true} />
 					{program ? (
@@ -90,6 +103,15 @@ export const ProgramReconstruction: FC = () => {
 					<ProgramProcessesLevel />
 				</div>
 			</Section>
+			{isOpenInfoModal && (
+				<Modal
+					title='Реконструкция деятельности'
+					description='Продукты это..  Этапы это..  Процессы это..'
+					modalWidth='large'
+					isOpen={isOpenInfoModal}
+					onClose={closeInfoModal}
+				/>
+			)}
 		</div>
 	);
 };
