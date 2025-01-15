@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../store/store';
 
 import { EROUTES } from '../../../shared/utils/routes';
@@ -16,6 +16,7 @@ import { ProgramDisciplineLevel } from './program-discipline-level';
 import { ProgramActivityLevel } from './program-activity-level';
 import { ProgramReconstructionLevel } from './program-reconstruction-level';
 import { Button } from '../../../shared/components/Button/ui/button';
+import { Modal } from '../../../shared/components/Modal/ui/modal';
 
 import styles from '../styles/program-disc-spec.module.scss';
 
@@ -25,6 +26,16 @@ export const ProgramDiscSpec: FC = () => {
 	const { program } = useSelector((state) => state.programDetail);
 
 	const { loadingData, errorData } = useSelector((state) => state.discSpec);
+
+	const [isOpenInfoModal, setIsOpenInfoModal] = useState<boolean>();
+
+	const openInfoModal = () => {
+		setIsOpenInfoModal(true);
+	};
+
+	const closeInfoModal = () => {
+		setIsOpenInfoModal(false);
+	};
 
 	const fetchInitialData = async () => {
 		if (program) {
@@ -57,7 +68,9 @@ export const ProgramDiscSpec: FC = () => {
 			<SectionImg
 				sectionWidth='full'
 				sectionTitle={{ text: 'Профессиональные дисциплины' }}
-				sectionDescription='Преобразование реконструкции профессиональной деятельности выпускника ОП в дисциплины (модули) учебного плана (в части ПД и ОПД) - это процесс проектирования содержания образовательной программы на основе реконструкции профессиональной деятельности выпускника ОП.'>
+				sectionDescription='Преобразование реконструкции профессиональной деятельности выпускника ОП в дисциплины (модули) учебного плана (в части ПД и ОПД) - это процесс проектирования содержания образовательной программы на основе реконструкции профессиональной деятельности выпускника ОП.'
+				withIcon
+				onIconClick={openInfoModal}>
 				<div className={styles.buttons}>
 					<Button
 						width='auto'
@@ -88,6 +101,15 @@ export const ProgramDiscSpec: FC = () => {
 					<ProgramDisciplineLevel />
 				</div>
 			</Section>
+			{isOpenInfoModal && (
+				<Modal
+					title='Профессиональные дисциплины'
+					description='Профессиональные дисциплины должны включать..'
+					modalWidth='large'
+					isOpen={isOpenInfoModal}
+					onClose={closeInfoModal}
+				/>
+			)}
 		</div>
 	);
 };

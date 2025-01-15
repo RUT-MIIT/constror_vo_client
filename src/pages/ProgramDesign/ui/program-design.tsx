@@ -1,11 +1,13 @@
 import type { FC } from 'react';
 
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from '../../../store/store';
 
 import { API_URL } from '../../../shared/config';
 import { EditAnnotationForm } from './edit-annotation-form';
 
+import { Modal } from '../../../shared/components/Modal/ui/modal';
 import { SectionImg, Section } from '../../../shared/components/Section';
 import { Button } from '../../../shared/components/Button/ui/button';
 import { ButtonLink } from '../../../shared/components/Button/ui/button-link';
@@ -15,6 +17,17 @@ import styles from '../styles/program-design.module.scss';
 export const ProgramDesign: FC = () => {
 	const navigate = useNavigate();
 	const { program } = useSelector((state) => state.programDetail);
+
+	const [isOpenAnnotationInfoModal, setIsOpenAnnotationInfoModal] =
+		useState<boolean>();
+
+	const openParticipantsInfoModal = () => {
+		setIsOpenAnnotationInfoModal(true);
+	};
+
+	const closeParticipantsInfoModal = () => {
+		setIsOpenAnnotationInfoModal(false);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -45,9 +58,20 @@ export const ProgramDesign: FC = () => {
 			<Section
 				sectionWidth='full'
 				sectionTitle={{ text: 'Аннотация' }}
-				sectionDescription='Введите аннотацию для программы.'>
+				sectionDescription='Введите аннотацию для программы.'
+				withIcon
+				onIconClick={openParticipantsInfoModal}>
 				<EditAnnotationForm />
 			</Section>
+			{isOpenAnnotationInfoModal && (
+				<Modal
+					title='Аннотация программы'
+					description='Аннотация должна включать..'
+					modalWidth='large'
+					isOpen={isOpenAnnotationInfoModal}
+					onClose={closeParticipantsInfoModal}
+				/>
+			)}
 		</div>
 	);
 };
